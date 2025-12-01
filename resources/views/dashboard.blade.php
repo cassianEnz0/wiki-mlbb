@@ -8,7 +8,7 @@
             <div class="flex gap-2 w-full md:w-auto justify-end">
                 <form action="{{ route('dashboard') }}" method="GET" class="flex gap-2 w-full md:w-auto">
                     <input type="text" name="search" placeholder="Cari Hero..." value="{{ request('search') }}" 
-                           class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full md:w-64">
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full md:w-64">
                     <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
                         Cari
                     </button>
