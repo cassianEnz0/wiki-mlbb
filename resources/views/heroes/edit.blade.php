@@ -10,9 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
     <style>
-        /* --- STYLE INI SAMA PERSIS DENGAN CREATE --- */
-        
-        /* BASE THEME (TERANG MONOCHROME) */
+        /* BASE THEME */
         body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
         h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
         
@@ -20,104 +18,44 @@
         .card-header { background: transparent; border-bottom: 2px solid #e5e7eb; padding: 25px; }
         
         .form-control, .form-select {
-            background-color: #f9fafb !important;
-            border: 1px solid #d1d5db !important;
-            color: #111827 !important;
-            padding: 12px;
-            border-radius: 8px;
-            height: 50px !important; 
+            background-color: #f9fafb !important; border: 1px solid #d1d5db !important; color: #111827 !important; padding: 12px; border-radius: 8px; height: 50px !important; 
         }
         .form-control:focus { background-color: #ffffff !important; border-color: #111827 !important; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); }
         input[type="file"].form-control { height: auto !important; }
         label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
 
-        /* --- PERBAIKAN TOTAL SELECT2 --- */
-        
-        /* 1. Container Utama */
+        /* SELECT2 STYLE */
         .select2-container .select2-selection--multiple {
-            background-color: #f9fafb;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            min-height: 50px !important;
-            display: flex !important;
-            align-items: center !important; 
-            flex-wrap: wrap !important;
-            padding: 4px 8px;
-            gap: 6px; 
-            cursor: pointer !important;
+            background-color: #f9fafb; border: 1px solid #d1d5db; border-radius: 8px; min-height: 50px !important;
+            display: flex !important; align-items: center !important; flex-wrap: wrap !important; padding: 4px 8px; gap: 6px; cursor: pointer !important;
         }
-
-        /* 2. ITEM TERPILIH (PUTIH TEXT HITAM) */
         .select2-container--default .select2-selection--multiple .select2-selection__choice {
-            background-color: #ffffff !important;
-            border: 1px solid #d1d5db !important;
-            color: #000000 !important;
-            border-radius: 6px;
-            padding: 0;
-            padding-left: 28px !important;
-            padding-right: 12px !important;
-            height: 34px;
-            display: inline-flex !important; 
-            align-items: center !important;
-            position: relative;
-            margin: 0 !important;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            background-color: #ffffff !important; border: 1px solid #d1d5db !important; color: #000000 !important;
+            border-radius: 6px; padding: 0; padding-left: 28px !important; padding-right: 12px !important; height: 34px;
+            display: inline-flex !important; align-items: center !important; position: relative; margin: 0 !important;
+            font-size: 0.85rem; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-
-        /* 3. Tombol X (Remove) */
         .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-            bottom: 0 !important;
-            width: 26px !important;
-            height: 100% !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            color: #ef4444 !important;
-            font-weight: bold;
-            border-right: 1px solid #e5e7eb;
-            margin-right: 0 !important;
-            background: transparent !important;
+            position: absolute !important; left: 0 !important; top: 0 !important; bottom: 0 !important; width: 26px !important;
+            height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important;
+            color: #ef4444 !important; font-weight: bold; border-right: 1px solid #e5e7eb; margin-right: 0 !important; background: transparent !important;
         }
-        
         .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-            background-color: #fef2f2 !important;
-            color: #dc2626 !important;
+            background-color: #fef2f2 !important; color: #dc2626 !important;
         }
-
-        /* 4. MATIKAN INPUT PENCARIAN SECARA VISUAL */
-        .select2-search__field {
-            width: 0.5em !important;
-            color: transparent !important;
-            caret-color: transparent !important;
-            cursor: pointer !important;
-        }
-
-        .select2-selection__choice img {
-            border-radius: 4px;
-            margin-right: 8px;
-            height: 22px;
-            width: 22px;
-            object-fit: contain;
-        }
-
-        /* Dropdown & Summernote Styles */
+        .select2-search__field { width: 0.5em !important; color: transparent !important; caret-color: transparent !important; cursor: pointer !important; }
+        .select2-selection__choice img { border-radius: 4px; margin-right: 8px; height: 22px; width: 22px; object-fit: contain; }
         .select2-dropdown { border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
         .select2-results__option { padding: 10px; color: #1f2937; }
         .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #f3f4f6; color: black; }
         
+        /* SUMMERNOTE STYLE */
         .note-editor { border-color: #d1d5db !important; background: #fff; }
         .note-toolbar { background-color: #f3f4f6 !important; border-bottom: 1px solid #d1d5db !important; }
         .note-btn { color: #374151 !important; }
         
-        /* Tombol Update Kuning (Pembeda dikit biar tau ini Edit) */
-        .btn-warning { background-color: #111827; color: white; border: none; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
-        .btn-warning:hover { background-color: #000; color: white; }
-        
+        .btn-warning { background-color: #f59e0b; color: white; border: none; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
+        .btn-warning:hover { background-color: #d97706; color: white; }
         .btn-outline-secondary { color: #4b5563; border-color: #d1d5db; padding: 10px 24px; border-radius: 8px; }
         .btn-outline-secondary:hover { background-color: #f3f4f6; color: #111827; }
     </style>
@@ -130,6 +68,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4>Edit Hero: {{ $hero->name }}</h4>
+                    <span class="badge bg-secondary text-white fw-normal">ID: {{ $hero->id }}</span>
                 </div>
                 <div class="card-body p-5">
                     
@@ -140,8 +79,9 @@
                     @endif
 
                     <form action="{{ route('heroes.update', $hero->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT') <div class="row g-5">
+                        @csrf @method('PUT')
+
+                        <div class="row g-5">
                             <div class="col-md-5">
                                 <h5 class="mb-4 border-bottom pb-2" style="border-color: #e5e7eb !important;">Identitas Hero</h5>
                                 
@@ -151,7 +91,7 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label>Foto</label>
+                                    <label>Ganti Foto (Opsional)</label>
                                     <input type="file" name="photo" class="form-control" accept="image/*">
                                     <div class="mt-3">
                                         <p class="small text-muted mb-1">Foto Saat Ini:</p>
@@ -165,7 +105,6 @@
                                     <select name="roles[]" class="form-control select2-img" multiple="multiple" required>
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}" data-image="{{ asset($role->image) }}"
-                                                {{-- LOGIC: Auto Select role lama --}}
                                                 {{ $hero->roles->contains($role->id) ? 'selected' : '' }}>
                                                 {{ $role->name }}
                                             </option>
@@ -208,7 +147,7 @@
                             </div>
                         </div>
 
-                        <div class="d-flex gap-3 mt-5 pt-4 border-top" style="border-color: #e5e7eb !important;">
+                        <div class="d-flex gap-3 mt-5 pt-4 border-top justify-content-end" style="border-color: #e5e7eb !important;">
                             <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">Batal</a>
                             <button type="submit" class="btn btn-warning">Perbarui Hero</button>
                         </div>
@@ -227,10 +166,11 @@
 
 <script>
     $(document).ready(function() {
+        // REVISI TINGGI 350px
         $('#summernote').summernote({
             placeholder: 'Tulis legenda hero disini...',
             tabsize: 2,
-            height: 250,
+            height: 350,
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
@@ -246,23 +186,19 @@
             return $('<span><img src="' + imageUrl + '" style="width:20px; height:20px; margin-right:8px; border-radius:3px; object-fit:contain;" /> ' + opt.text + '</span>');
         };
 
-        // KONFIGURASI SAMA PERSIS (ANTI NGETIK)
         var select2Config = { 
             width: '100%', 
             templateResult: formatState, 
             templateSelection: formatState,
-            minimumResultsForSearch: Infinity // Hapus Search Box di Dropdown
+            minimumResultsForSearch: Infinity 
         };
 
-        // Init Select2
         $('.select2-img').select2(select2Config);
         $('#itemSelector').select2(select2Config);
 
-        // --- JURUS PAMUNGKAS: FORCE READONLY ---
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').blur();
         });
-        
         $('.select2-search__field').prop('readonly', true);
     });
 </script>

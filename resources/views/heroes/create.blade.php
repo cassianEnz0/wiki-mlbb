@@ -10,13 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
     <style>
-        /* BASE THEME */
+        /* TEMA TERANG MONOCHROME */
         body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
         h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
         
         .card { background: #ffffff; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         .card-header { background: transparent; border-bottom: 2px solid #e5e7eb; padding: 25px; }
         
+        /* INPUT STYLE */
         .form-control, .form-select {
             background-color: #f9fafb !important;
             border: 1px solid #d1d5db !important;
@@ -29,91 +30,42 @@
         input[type="file"].form-control { height: auto !important; }
         label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
 
-        /* --- PERBAIKAN TOTAL SELECT2 --- */
-        
-        /* 1. Container Utama */
+        /* SELECT2 STYLE */
         .select2-container .select2-selection--multiple {
             background-color: #f9fafb;
             border: 1px solid #d1d5db;
             border-radius: 8px;
             min-height: 50px !important;
-            display: flex !important;
-            align-items: center !important; 
-            flex-wrap: wrap !important;
-            padding: 4px 8px;
-            gap: 6px; 
-            cursor: pointer !important; /* Ubah kursor jadi telunjuk */
+            display: flex !important; align-items: center !important; flex-wrap: wrap !important;
+            padding: 4px 8px; gap: 6px; cursor: pointer !important;
         }
-
-        /* 2. ITEM TERPILIH (REVISI WARNA: PUTIH TEXT HITAM) */
         .select2-container--default .select2-selection--multiple .select2-selection__choice {
-            background-color: #ffffff !important; /* BACKGROUND PUTIH */
-            border: 1px solid #d1d5db !important; /* Border Abu biar keliatan */
-            color: #000000 !important; /* TEKS HITAM */
-            
-            border-radius: 6px;
-            padding: 0;
-            padding-left: 28px !important;
-            padding-right: 12px !important;
-            height: 34px;
-            display: inline-flex !important; 
-            align-items: center !important;
-            position: relative;
-            margin: 0 !important;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Sedikit bayangan biar manis */
+            background-color: #ffffff !important; border: 1px solid #d1d5db !important; color: #000000 !important;
+            border-radius: 6px; padding: 0; padding-left: 28px !important; padding-right: 12px !important; height: 34px;
+            display: inline-flex !important; align-items: center !important; position: relative; margin: 0 !important;
+            font-size: 0.85rem; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-
-        /* 3. Tombol X (Remove) - Merah dikit biar keliatan tombol */
         .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-            bottom: 0 !important;
-            width: 26px !important;
-            height: 100% !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            color: #ef4444 !important; /* Merah */
-            font-weight: bold;
-            border-right: 1px solid #e5e7eb; /* Border pemisah */
-            margin-right: 0 !important;
+            position: absolute !important; left: 0 !important; top: 0 !important; bottom: 0 !important; width: 26px !important;
+            height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important;
+            color: #ef4444 !important; font-weight: bold; border-right: 1px solid #e5e7eb; margin-right: 0 !important;
             background: transparent !important;
         }
-        
         .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-            background-color: #fef2f2 !important; /* Merah pudar pas hover */
-            color: #dc2626 !important;
+            background-color: #fef2f2 !important; color: #dc2626 !important;
         }
-
-        /* 4. MATIKAN INPUT PENCARIAN SECARA VISUAL */
-        /* Kita bikin inputnya transparan dan kecil, biar user taunya ini cuma tombol */
-        .select2-search__field {
-            width: 0.5em !important;
-            color: transparent !important;
-            caret-color: transparent !important; /* Kursorn ilang */
-            cursor: pointer !important;
-        }
-
-        .select2-selection__choice img {
-            border-radius: 4px;
-            margin-right: 8px;
-            height: 22px;
-            width: 22px;
-            object-fit: contain;
-        }
-
-        /* Dropdown & Summernote Styles */
+        .select2-search__field { width: 0.5em !important; color: transparent !important; caret-color: transparent !important; cursor: pointer !important; }
+        .select2-selection__choice img { border-radius: 4px; margin-right: 8px; height: 22px; width: 22px; object-fit: contain; }
         .select2-dropdown { border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
         .select2-results__option { padding: 10px; color: #1f2937; }
-        /* Pilihan pas di-hover/sorot di dropdown tetep abu biar kontras */
         .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #f3f4f6; color: black; }
         
+        /* SUMMERNOTE STYLE */
         .note-editor { border-color: #d1d5db !important; background: #fff; }
         .note-toolbar { background-color: #f3f4f6 !important; border-bottom: 1px solid #d1d5db !important; }
         .note-btn { color: #374151 !important; }
+        
+        /* BUTTON STYLE */
         .btn-primary { background-color: #111827; color: white; border: none; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
         .btn-primary:hover { background-color: #000; }
         .btn-outline-secondary { color: #4b5563; border-color: #d1d5db; padding: 10px 24px; border-radius: 8px; }
@@ -143,14 +95,18 @@
                         <div class="row g-5">
                             <div class="col-md-5">
                                 <h5 class="mb-4 border-bottom pb-2" style="border-color: #e5e7eb !important;">Identitas Hero</h5>
+                                
                                 <div class="mb-4">
                                     <label>Nama Hero</label>
                                     <input type="text" name="name" class="form-control" placeholder="Contoh: Gusion" required>
                                 </div>
+
                                 <div class="mb-4">
                                     <label>Foto Potret</label>
                                     <input type="file" name="photo" class="form-control" accept="image/*" required>
+                                    <div class="form-text mt-2">Format: JPG, PNG (Max 2MB). Gunakan rasio Portrait.</div>
                                 </div>
+
                                 <div class="mb-4">
                                     <label>Role (Kelas)</label>
                                     <select name="roles[]" class="form-control select2-img" multiple="multiple" required>
@@ -159,6 +115,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="mb-4">
                                     <label>Posisi / Lane</label>
                                     <select name="positions[]" class="form-control select2-img" multiple="multiple" required>
@@ -171,6 +128,7 @@
 
                             <div class="col-md-7">
                                 <h5 class="mb-4 border-bottom pb-2" style="border-color: #e5e7eb !important;">Atribut & Kisah</h5>
+
                                 <div class="mb-4">
                                     <label>Rekomendasi Build (Maksimal 6)</label>
                                     <select name="items[]" id="itemSelector" class="form-control select2-img" multiple="multiple" required>
@@ -181,6 +139,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="mb-4">
                                     <label>Kisah / Lore</label>
                                     <textarea name="story" id="summernote" required></textarea>
@@ -188,10 +147,11 @@
                             </div>
                         </div>
 
-                        <div class="d-flex gap-3 mt-5 pt-4 border-top" style="border-color: #e5e7eb !important;">
+                        <div class="d-flex gap-3 mt-5 pt-4 border-top justify-content-end" style="border-color: #e5e7eb !important;">
                             <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan Hero</button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -206,10 +166,11 @@
 
 <script>
     $(document).ready(function() {
+        // REVISI TINGGI EDITOR JADI 350px BIAR SEJAJAR
         $('#summernote').summernote({
             placeholder: 'Tulis legenda hero disini...',
             tabsize: 2,
-            height: 250,
+            height: 350, 
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
@@ -225,28 +186,20 @@
             return $('<span><img src="' + imageUrl + '" style="width:20px; height:20px; margin-right:8px; border-radius:3px; object-fit:contain;" /> ' + opt.text + '</span>');
         };
 
-        // KONFIGURASI SELECT2 + MATIIN FUNGSI NGETIK DI JS
         var select2Config = { 
             width: '100%', 
             templateResult: formatState, 
             templateSelection: formatState,
-            minimumResultsForSearch: Infinity // Hapus Search Box di Dropdown
+            minimumResultsForSearch: Infinity 
         };
 
-        // Init Select2
-        var $selectRoles = $('.select2-img').select2(select2Config);
-        var $selectItems = $('#itemSelector').select2(select2Config);
+        $('.select2-img').select2(select2Config);
+        $('#itemSelector').select2(select2Config);
 
-        // --- JURUS PAMUNGKAS: FORCE READONLY ---
-        // Ini biar inputan di dalem kotak select2 bener-bener mati, ga bisa diketik sama sekali
-        // Pas select2 kebuka, kita paksa input searchnya jadi readonly
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').blur();
         });
-        
-        // Kita cegah input keyboard apapun di area Select2
         $('.select2-search__field').prop('readonly', true);
-        
     });
 </script>
 
