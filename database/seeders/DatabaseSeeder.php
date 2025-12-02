@@ -55,10 +55,10 @@ class DatabaseSeeder extends Seeder
             ['name' => "Hunter Strike",          'image' => "images/items/attack/hunter-strike.png"],
             ['name' => "Malefic Roar",           'image' => "images/items/attack/malefic-roar.png"],
             ['name' => "Rose Gold Meteor",       'image' => "images/items/attack/rose-gold-meteor.png"],
-            ['name' => "Scarlet Phantom",        'image' => "images/items/attack/scarlet phantom.png"],
-            ['name' => "Sea Halberd",            'image' => "images/items/attack/sea halberd.png"],
-            ['name' => "War Axe",                'image' => "images/items/attack/war axe.png"],
-            ['name' => "Wind of Nature",         'image' => "images/items/attack/wind of nature.png"],
+            ['name' => "Scarlet Phantom",        'image' => "images/items/attack/scarlet-phantom.png"],
+            ['name' => "Sea Halberd",            'image' => "images/items/attack/sea-halberd.png"],
+            ['name' => "War Axe",                'image' => "images/items/attack/war-axe.png"],
+            ['name' => "Wind of Nature",         'image' => "images/items/attack/wind-of-nature.png"],
             ['name' => "Windtalker",             'image' => "images/items/attack/windtalker.png"],
         ];
         foreach ($attackItems as $i) { Item::firstOrCreate(['name' => $i['name']], ['category' => 'Attack', 'image' => $i['image']]); }
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
             ['name' => "Queen's Wings",          'image' => "images/items/defense/queen's-wings.png"],
             ['name' => "Radiant Armor",          'image' => "images/items/defense/radiant-armor.png"],
             ['name' => "Thunder Belt",           'image' => "images/items/defense/thunder-belt.png"],
-            ['name' => "Twilight Armor",         'image' => "images/items/defense/twilight armor.png"],
+            ['name' => "Twilight Armor",         'image' => "images/items/defense/twilight-armor.png"],
         ];
         foreach ($defenseItems as $i) { Item::firstOrCreate(['name' => $i['name']], ['category' => 'Defense', 'image' => $i['image']]); }
 
@@ -95,9 +95,9 @@ class DatabaseSeeder extends Seeder
             ['name' => "Glowing Wand",           'image' => "images/items/magic/glowing-wand.png"],
             ['name' => "Holy Crystal",           'image' => "images/items/magic/holy-crystal.png"],
             ['name' => "Ice Queen Wand",         'image' => "images/items/magic/ice-queen-wand.png"],
-            ['name' => "Lightning Truncheon",    'image' => "images/items/magic/lightning truncheon.png"],
-            ['name' => "Necklace of Durance",    'image' => "images/items/magic/necklace of durance.png"],
-            ['name' => "Winter Truncheon",       'image' => "images/items/magic/winter truncheon.png"],
+            ['name' => "Lightning Truncheon",    'image' => "images/items/magic/lightning-truncheon.png"],
+            ['name' => "Necklace of Durance",    'image' => "images/items/magic/necklace-of-durance.png"],
+            ['name' => "Winter Truncheon",       'image' => "images/items/magic/winter-truncheon.png"],
         ];
         foreach ($magicItems as $i) { Item::firstOrCreate(['name' => $i['name']], ['category' => 'Magic', 'image' => $i['image']]); }
 

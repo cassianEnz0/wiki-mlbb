@@ -72,9 +72,13 @@ Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang 
                             
                             @auth
                                 <a href="{{ route('heroes.edit', $hero->id) }}" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">Edit</a>
-                                <form action="{{ route('heroes.destroy', $hero->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?');">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">Hapus</button>
+                                <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST" style="display:inline;">
+                                    @csrf 
+                                    @method('DELETE')
+    
+                                    <button type="button" onclick="confirmDelete('{{ $hero->id }}', '{{ $hero->name }}')" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">
+                                        Hapus
+                                    </button>
                                 </form>
                             @endauth
 
@@ -113,4 +117,28 @@ Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang 
 
         </div>
     </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmDelete(heroId, heroName) {
+        Swal.fire({
+            title: 'Hapus Hero ' + heroName + '?',
+            text: "Data ini tidak bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+            background: '#fff',
+            borderRadius: '10px'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Find the specific form for THIS hero and submit it
+                document.getElementById('delete-form-' + heroId).submit();
+            }
+        })
+    }
+</script>
 </x-app-layout>
