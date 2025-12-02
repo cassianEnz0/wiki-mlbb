@@ -10,50 +10,60 @@ use Illuminate\Support\Str;
 
 class HeroController extends Controller
 {
-    // 1. TAMPILKAN LIST HERO + SEARCH + PAGINATION
+    // 1. TAMPILKAN LIST HERO + SEARCH + FILTER + PAGINATION
     public function index()
     {
-        // Mulai Query
-        $heroes = Hero::with('roles')->latest();
+        // Start Query with Eager Loading
+        $heroes = Hero::with(['roles', 'positions'])->latest();
 
-        // Kalau ada yang nyari (ketik di search bar)
+        // Filter: Search Name
         if (request('search')) {
             $heroes->where('name', 'like', '%' . request('search') . '%');
         }
 
-        // Ambil datanya, tapi potong jadi 10 hero per halaman
-        // paginate(10) artinya 1 halaman cuma muat 10 hero
-        $heroes = $heroes->paginate(10); 
+        // Filter: Role (e.g. Mage)
+        if (request('role')) {
+            $heroes->whereHas('roles', function($query) {
+                $query->where('name', request('role'));
+            });
+        }
+
+        // Filter: Lane (e.g. Mid Lane)
+        if (request('lane')) {
+            $heroes->whereHas('positions', function($query) {
+                $query->where('name', 'like', '%' . request('lane') . '%');
+            });
+        }
+
+        // Get Data (10 per page) and keep filters in URL (appends)
+        $heroes = $heroes->paginate(10)->appends(request()->all());
 
         return view('dashboard', compact('heroes'));
     }
 
-    // 2. TAMPILKAN FORM TAMBAH HERO (Updated)
+    // 2. FORM CREATE
     public function create()
     {
         $roles = Role::all();
-        $items = Item::all();
-        $positions = \App\Models\Position::all(); // <-- Kita ambil data Posisi
+        $items = Item::all()->groupBy('category'); // Group items nicely
+        $positions = \App\Models\Position::all(); 
         return view('heroes.create', compact('roles', 'items', 'positions'));
     }
 
-    // 3. PROSES SIMPAN DATA (Updated)
+    // 3. STORE NEW HERO
     public function store(Request $request)
     {
-        // A. Validasi (Tambah positions)
         $request->validate([
             'name' => 'required|string|max:255',
             'photo' => 'required|image|max:2048',
             'story' => 'required',
             'roles' => 'required|array',
-            'positions' => 'required|array', // <-- Validasi Posisi
+            'positions' => 'required|array',
             'items' => 'required|array|max:6',
         ]);
 
-        // B. Upload Gambar Hero
         $photoPath = $request->file('photo')->store('heroes', 'public');
 
-        // C. Simpan Hero
         $hero = Hero::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name) . '-' . Str::random(5),
@@ -62,61 +72,50 @@ class HeroController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        // D. Sambungin Relasi (Roles, Items, dan Positions)
         $hero->roles()->attach($request->roles);
         $hero->items()->attach($request->items);
-        $hero->positions()->attach($request->positions); // <-- Simpan Posisi
+        $hero->positions()->attach($request->positions);
 
         return redirect()->route('dashboard')->with('success', 'Hero sukses dibuat!');
     }
 
-    // 4. TAMPILKAN DETAIL HERO (Halaman Baca)
+    // 4. SHOW DETAIL
     public function show(Hero $hero)
     {
-        // Ambil data hero beserta relasinya (roles, items, positions)
-        // Biar database gak kerja dua kali (Eager Loading)
         $hero->load(['roles', 'items', 'positions', 'author']);
-        
         return view('heroes.show', compact('hero'));
     }
 
-    // 5. TAMPILKAN FORM EDIT
+    // 5. EDIT FORM
     public function edit(Hero $hero)
     {
         $roles = Role::all();
-        $items = Item::all();
+        $items = Item::all()->groupBy('category');
         $positions = \App\Models\Position::all();
-        
         return view('heroes.edit', compact('hero', 'roles', 'items', 'positions'));
     }
 
-    // 6. PROSES UPDATE DATA
+    // 6. UPDATE HERO
     public function update(Request $request, Hero $hero)
     {
-        // Validasi (Foto jadi nullable/boleh kosong, karena kalau gak mau ganti foto ya gapapa)
         $request->validate([
             'name' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:2048', // Boleh kosong
+            'photo' => 'nullable|image|max:2048',
             'story' => 'required',
             'roles' => 'required|array',
             'positions' => 'required|array',
             'items' => 'required|array|max:6',
         ]);
 
-        // Logic Update Foto
         if ($request->hasFile('photo')) {
-            // Hapus foto lama biar server gak penuh
             if ($hero->photo) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($hero->photo);
             }
-            // Upload foto baru
             $photoPath = $request->file('photo')->store('heroes', 'public');
         } else {
-            // Pake foto lama
             $photoPath = $hero->photo;
         }
 
-        // Update Data Hero
         $hero->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name) . '-' . Str::random(5),
@@ -124,7 +123,6 @@ class HeroController extends Controller
             'story' => $request->story,
         ]);
 
-        // Update Relasi (Pake 'sync' biar otomatis hapus yg lama, tambah yg baru)
         $hero->roles()->sync($request->roles);
         $hero->items()->sync($request->items);
         $hero->positions()->sync($request->positions);
@@ -132,17 +130,13 @@ class HeroController extends Controller
         return redirect()->route('dashboard')->with('success', 'Hero berhasil diupdate!');
     }
 
-    // 7. HAPUS HERO
+    // 7. DELETE HERO
     public function destroy(Hero $hero)
     {
-        // Hapus fotonya dulu dari penyimpanan
         if ($hero->photo) {
             \Illuminate\Support\Facades\Storage::disk('public')->delete($hero->photo);
         }
-
-        // Hapus datanya dari database
         $hero->delete();
-
         return redirect()->route('dashboard')->with('success', 'Hero telah dihapus!');
     }
 }

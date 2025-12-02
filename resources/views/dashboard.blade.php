@@ -102,12 +102,39 @@ Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang 
 
             @if($heroes->isEmpty())
                 <div class="text-center py-12 bg-white rounded-lg shadow-sm border border-dashed border-gray-300 mt-6">
-                    <p class="text-gray-500 text-lg">
-                        Hero <strong>"{{ request('search') }}"</strong> tidak ditemukan.
-                    </p>
-                    @if(request('search'))
-                        <a href="{{ route('dashboard') }}" class="text-blue-500 hover:underline mt-2 inline-block">Reset Pencarian</a>
-                    @endif
+                    <div class="flex flex-col items-center justify-center text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                        @if(request('search'))
+                            <p class="text-lg">
+                                Hero dengan nama <strong>"{{ request('search') }}"</strong> tidak ditemukan.
+                            </p>
+                            <a href="{{ route('dashboard') }}" class="text-blue-500 hover:underline mt-2 text-sm">Reset Pencarian</a>
+                        
+                        @elseif(request('role'))
+                            <p class="text-lg">
+                                Belum ada Hero dengan Role <strong>{{ request('role') }}</strong>.
+                            </p>
+                            <a href="{{ route('dashboard') }}" class="text-blue-500 hover:underline mt-2 text-sm">Lihat Semua Hero</a>
+
+                        @elseif(request('lane'))
+                            <p class="text-lg">
+                                Belum ada Hero untuk posisi <strong>{{ request('lane') }}</strong>.
+                            </p>
+                            <a href="{{ route('dashboard') }}" class="text-blue-500 hover:underline mt-2 text-sm">Lihat Semua Hero</a>
+
+                        @else
+                            <p class="text-lg mb-2">Belum ada data Hero di database.</p>
+                            @auth
+                                <p class="text-sm text-gray-400 mb-4">Jadilah yang pertama menambahkan hero!</p>
+                                <a href="{{ route('heroes.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">
+                                    + Tambah Hero Baru
+                                </a>
+                            @endauth
+                        @endif
+                    </div>
                 </div>
             @endif
 
