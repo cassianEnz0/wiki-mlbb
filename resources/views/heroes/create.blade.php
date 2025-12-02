@@ -65,10 +65,12 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">Build Items (Maksimal 6)</label>
                     <select name="items[]" id="itemSelector" class="form-control select2-img-dropdown" multiple="multiple" required>
-                        @foreach($items as $item)
-                            <option value="{{ $item->id }}" data-image="{{ asset($item->image) }}">
-                                {{ $item->name }}
-                            </option>
+                        @foreach($items as $category => $group)
+                            @foreach($group as $item)
+                                <option value="{{ $item->id }}" data-image="{{ asset($item->image) }}">
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
                         @endforeach
                     </select>
                 </div>
