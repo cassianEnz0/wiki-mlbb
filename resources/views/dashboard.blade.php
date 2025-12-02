@@ -39,18 +39,10 @@
                     Tentang Wiki Legend: Fanbase Mobile Legends: Bang Bang.
                 </h3>
                 <p class="text-gray-700 leading-relaxed mb-4">
-                    Selamat datang di Legend Wiki  rumah bagi para penggemar Mobile Legends: Bang Bang!
-Website ini dibuat sebagai pusat informasi komunitas, tempat kamu bisa menemukan berbagai data, trivia, hingga pembahasan lengkap seputar hero, lore, item, role, dan update terbaru MLBB.
-
-Kami hadir untuk memudahkan pemain baik pemula maupun veteran dalam memahami gameplay, meta, serta perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi agar pengalaman membaca kamu lebih nyaman.
-
-WikiFans dikembangkan oleh komunitas fanbase yang ingin menghadirkan sumber informasi terpercaya dan selalu up to date. Setiap artikel yang ada di sini dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
-
-Terima kasih sudah mampir!
-Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang lebih hebat!
-                </p>
-                <p class="text-gray-700 leading-relaxed">
-                    Tujuan kami adalah menjadi sumber referensi cepat dan akurat, membantu Anda memilih hero yang tepat, memahami meta, dan menyusun strategi tim yang solid. Gunakan fitur pencarian di atas untuk menemukan hero favorit Anda atau jelajahi daftar hero di bawah ini!
+                    Selamat datang di Wiki Legend, pusat informasi untuk para penggemar Mobile Legends: Bang Bang.
+                    Wiki ini dibuat sebagai ruang komunitas yang menyajikan berbagai data, trivia, serta pembahasan lengkap mengenai hero, lore, item, role, dan update terbaru MLBB.
+                    Tujuan utama Wiki Legend adalah membantu pemain, baik pemula maupun veteran, memahami gameplay, meta, dan perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi demi kenyamanan membaca.
+                    Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan sumber informasi terpercaya dan selalu diperbarui. Setiap artikel dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
                 </p>
             </div>
             <!-- END: Bagian About Web yang Baru -->
