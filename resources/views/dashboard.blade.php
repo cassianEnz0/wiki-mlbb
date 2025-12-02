@@ -36,13 +36,13 @@
             <!-- START: Bagian About Web yang Baru -->
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-8 p-6 lg:p-8 border-t-4 border-blue-600">
                 <h3 class="text-2xl font-extrabold text-gray-900 mb-4 border-b pb-2">
-                    Tentang Web: Fanbase Mobile Legends: Bang Bang.
+                    Tentang Wiki Legend: Fanbase Mobile Legends: Bang Bang.
                 </h3>
                 <p class="text-gray-700 leading-relaxed mb-4">
                     Selamat datang di Legend Wiki  rumah bagi para penggemar Mobile Legends: Bang Bang!
 Website ini dibuat sebagai pusat informasi komunitas, tempat kamu bisa menemukan berbagai data, trivia, hingga pembahasan lengkap seputar hero, lore, item, role, dan update terbaru MLBB.
 
-Kami hadir untuk memudahkan pemain baik pemula maupun veteran—dalam memahami gameplay, meta, serta perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi agar pengalaman membaca kamu lebih nyaman.
+Kami hadir untuk memudahkan pemain baik pemula maupun veteran dalam memahami gameplay, meta, serta perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi agar pengalaman membaca kamu lebih nyaman.
 
 WikiFans dikembangkan oleh komunitas fanbase yang ingin menghadirkan sumber informasi terpercaya dan selalu up to date. Setiap artikel yang ada di sini dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
 

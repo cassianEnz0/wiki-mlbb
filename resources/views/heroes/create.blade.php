@@ -77,8 +77,14 @@
                     <label class="form-label fw-bold">Story / Lore</label>
                     <textarea name="story" id="summernote" required></textarea>
                 </div>
-
+                
+                <div class="mb-3">
                 <button type="submit" class="btn btn-primary w-100">Simpan Hero</button>
+                </div>
+
+                <!-- START: Tombol Kembali ke Menu Utama DITAMBAHKAN DI SINI -->
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary w-100">Batal / Kembali ke Daftar Hero</a>
+                <!-- END: Tombol Kembali ke Menu Utama DITAMBAHKAN DI SINI -->
             </form>
         </div>
     </div>
