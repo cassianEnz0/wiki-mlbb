@@ -70,17 +70,12 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">Build Items (Maksimal 6)</label>
                     <select name="items[]" id="itemSelector" class="form-control select2-img-dropdown" multiple="multiple" required>
-                        {{-- FIXED LOOP: Handles Categories --}}
-                        @foreach($items as $category => $listItems)
-                            <optgroup label="{{ $category }}">
-                                @foreach($listItems as $item)
-                                    <option value="{{ $item->id }}" data-image="{{ asset($item->image) }}"
-                                        {{-- Check if hero already has this item --}}
-                                        {{ $hero->items->contains($item->id) ? 'selected' : '' }}>
-                                        {{ $item->name }}
-                                    </option>
-                                @endforeach
-                            </optgroup>
+                        @foreach($items as $item)
+                            <option value="{{ $item->id }}" data-image="{{ asset($item->image) }}"
+                                {{-- Cek apakah hero ini punya item ini? Kalo iya, select --}}
+                                {{ $hero->items->contains($item->id) ? 'selected' : '' }}>
+                                {{ $item->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -98,6 +93,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
