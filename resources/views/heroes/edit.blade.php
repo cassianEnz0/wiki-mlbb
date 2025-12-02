@@ -25,7 +25,9 @@
             
             <form action="{{ route('heroes.update', $hero->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT') <div class="mb-3">
+                @method('PUT') 
+
+                <div class="mb-3">
                     <label class="form-label fw-bold">Nama Hero</label>
                     <input type="text" name="name" class="form-control" value="{{ old('name', $hero->name) }}" required>
                 </div>
@@ -35,7 +37,9 @@
                     <input type="file" name="photo" class="form-control" accept="image/*">
                     <small class="text-muted">Biarkan kosong jika tidak ingin mengganti foto.</small>
                     <div class="mt-2">
-                        <img src="{{ asset('storage/' . $hero->photo) }}" width="100" class="rounded border">
+                        @if($hero->photo)
+                            <img src="{{ asset('storage/' . $hero->photo) }}" width="100" class="rounded border">
+                        @endif
                     </div>
                 </div>
 
@@ -66,11 +70,17 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">Build Items (Maksimal 6)</label>
                     <select name="items[]" id="itemSelector" class="form-control select2-img-dropdown" multiple="multiple" required>
-                        @foreach($items as $item)
-                            <option value="{{ $item->id }}" data-image="{{ asset($item->image) }}"
-                                {{ $hero->items->contains($item->id) ? 'selected' : '' }}>
-                                {{ $item->name }}
-                            </option>
+                        {{-- FIXED LOOP: Handles Categories --}}
+                        @foreach($items as $category => $listItems)
+                            <optgroup label="{{ $category }}">
+                                @foreach($listItems as $item)
+                                    <option value="{{ $item->id }}" data-image="{{ asset($item->image) }}"
+                                        {{-- Check if hero already has this item --}}
+                                        {{ $hero->items->contains($item->id) ? 'selected' : '' }}>
+                                        {{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </optgroup>
                         @endforeach
                     </select>
                 </div>
