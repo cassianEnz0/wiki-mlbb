@@ -68,7 +68,6 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4>Edit Hero: {{ $hero->name }}</h4>
-                    <span class="badge bg-secondary text-white fw-normal">ID: {{ $hero->id }}</span>
                 </div>
                 <div class="card-body p-5">
                     
