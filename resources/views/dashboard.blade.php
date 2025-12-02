@@ -57,36 +57,47 @@ Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang 
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 @foreach ($heroes as $hero)
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition duration-300 relative group border border-gray-100">
+                <!-- Card Container dengan efek hover naik (-translate-y-2) -->
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 relative group border border-gray-100">
                     
-                    <div class="relative h-64 w-full bg-gray-200">
+                    <!-- TOMBOL ADMIN (Hanya muncul jika login, posisi Pojok Kanan Atas) -->
+                    @auth
+                    <div class="absolute top-2 right-2 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition duration-300">
+                        <!-- Tombol Edit (Pensil) -->
+                        <a href="{{ route('heroes.edit', $hero->id) }}" class="bg-yellow-400 text-white p-2 rounded-full hover:bg-yellow-500 shadow-md transition" title="Edit Hero">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                            </svg>
+                        </a>
+
+                        <!-- Tombol Hapus (X) -->
+                        <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST">
+                            @csrf 
+                            @method('DELETE')
+                            <button type="button" onclick="confirmDelete('{{ $hero->id }}', '{{ $hero->name }}')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md transition" title="Hapus Hero">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    @endauth
+
+                    <!-- Gambar Hero (Bisa diklik menuju detail) -->
+                    <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200">
                         @if($hero->photo)
                             <img src="{{ asset('storage/' . $hero->photo) }}" class="w-full h-full object-cover object-top" alt="{{ $hero->name }}">
                         @else
                             <div class="flex items-center justify-center h-full text-gray-400">No Photo</div>
                         @endif
-                        
-                        <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center gap-2">
-                            
-                            <a href="{{ route('heroes.show', $hero->id) }}" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">Detail</a>
-                            
-                            @auth
-                                <a href="{{ route('heroes.edit', $hero->id) }}" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">Edit</a>
-                                <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST" style="display:inline;">
-                                    @csrf 
-                                    @method('DELETE')
-    
-                                    <button type="button" onclick="confirmDelete('{{ $hero->id }}', '{{ $hero->name }}')" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">
-                                        Hapus
-                                    </button>
-                                </form>
-                            @endauth
+                        <!-- Overlay Hitam dihapus agar bersih -->
+                    </a>
 
-                        </div>
-                    </div>
-
+                    <!-- Informasi Nama & Role -->
                     <div class="px-3 pt-3 pb-6 text-center bg-white relative z-10 border-t">
-                        <h3 class="text-md font-bold text-gray-800 truncate">{{ $hero->name }}</h3>
+                        <a href="{{ route('heroes.show', $hero->id) }}" class="hover:text-blue-600 transition">
+                            <h3 class="text-md font-bold text-gray-800 truncate">{{ $hero->name }}</h3>
+                        </a>
                         <div class="mt-2 flex flex-wrap justify-center gap-1">
                             @foreach($hero->roles->take(2) as $role)
                                 <span class="bg-gray-100 text-gray-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-gray-200">

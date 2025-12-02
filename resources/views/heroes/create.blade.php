@@ -83,7 +83,7 @@
                 </div>
 
                 <!-- START: Tombol Kembali ke Menu Utama DITAMBAHKAN DI SINI -->
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary w-100">Batal / Kembali ke Daftar Hero</a>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary w-100">Batal</a>
                 <!-- END: Tombol Kembali ke Menu Utama DITAMBAHKAN DI SINI -->
             </form>
         </div>
