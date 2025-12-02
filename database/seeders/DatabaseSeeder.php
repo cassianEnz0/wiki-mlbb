@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder
         // 3. POSITIONS (Sesuai Screenshot Folder Positions)
         $positions = [
             ['name' => 'Roam',      'image' => 'images/positions/roam.png'],
-            ['name' => 'Mid Lane',  'image' => 'images/positions/midlane.png'],
-            ['name' => 'Gold Lane', 'image' => 'images/positions/goldlane.png'],
+            ['name' => 'Mid Lane',  'image' => 'images/positions/mid.png'],
+            ['name' => 'Gold Lane', 'image' => 'images/positions/gold.png'],
             ['name' => 'Exp Lane',  'image' => 'images/positions/exp.png'],
-            ['name' => 'Jungler',   'image' => 'images/positions/junlger.png'], // Typo sesuai file asli
+            ['name' => 'Jungler',   'image' => 'images/positions/jungle.png'], // Typo sesuai file asli
         ];
         foreach ($positions as $p) { Position::firstOrCreate($p); }
 
