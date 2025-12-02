@@ -40,8 +40,8 @@
                         <div class="md:w-1/3 mb-6 md:mb-0">
                             <div class="sticky top-4">
                                 <img src="{{ asset('storage/' . $hero->photo) }}" 
-                                     class="w-56 h-80 mx-auto rounded-lg shadow-md mb-4 object-cover object-top" 
-                                     alt="{{ $hero->name }}">
+                                    class="w-56 h-80 mx-auto rounded-lg shadow-md mb-4 object-cover object-top" 
+                                    alt="{{ $hero->name }}">
                                 
                                 <div class="space-y-4">
                                     <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">

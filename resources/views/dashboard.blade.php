@@ -33,6 +33,28 @@
                 </div>
             @endif
 
+            <!-- START: Bagian About Web yang Baru -->
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-8 p-6 lg:p-8 border-t-4 border-blue-600">
+                <h3 class="text-2xl font-extrabold text-gray-900 mb-4 border-b pb-2">
+                    Tentang Web: Fanbase Mobile Legends: Bang Bang.
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Selamat datang di Legend Wiki  rumah bagi para penggemar Mobile Legends: Bang Bang!
+Website ini dibuat sebagai pusat informasi komunitas, tempat kamu bisa menemukan berbagai data, trivia, hingga pembahasan lengkap seputar hero, lore, item, role, dan update terbaru MLBB.
+
+Kami hadir untuk memudahkan pemain baik pemula maupun veteran—dalam memahami gameplay, meta, serta perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi agar pengalaman membaca kamu lebih nyaman.
+
+WikiFans dikembangkan oleh komunitas fanbase yang ingin menghadirkan sumber informasi terpercaya dan selalu up to date. Setiap artikel yang ada di sini dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
+
+Terima kasih sudah mampir!
+Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang lebih hebat!
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Tujuan kami adalah menjadi sumber referensi cepat dan akurat, membantu Anda memilih hero yang tepat, memahami meta, dan menyusun strategi tim yang solid. Gunakan fitur pencarian di atas untuk menemukan hero favorit Anda atau jelajahi daftar hero di bawah ini!
+                </p>
+            </div>
+            <!-- END: Bagian About Web yang Baru -->
+
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 @foreach ($heroes as $hero)
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition duration-300 relative group border border-gray-100">
