@@ -7,40 +7,61 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Item;
 use App\Models\Position;
+use App\Models\Hero; // Jangan lupa import ini
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Akun Admin
-        User::create([
-            'name' => 'Admin Ganteng',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password'),
-        ]);
+        // 1. Akun Admin (Pakai firstOrCreate biar aman kalau di-seed ulang)
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Admin Ganteng',
+                'password' => Hash::make('password'),
+            ]
+        );
 
-        // 2. ROLES (Sesuai Screenshot Folder Roles)
-        $roles = [
+        echo "✅ Admin Siap: admin@gmail.com | password\n";
+
+        // 2. ROLES (Sesuai Data Lu)
+        $rolesData = [
             ['name' => 'Tank',      'image' => 'images/roles/tank.png'],
             ['name' => 'Fighter',   'image' => 'images/roles/fighter.png'],
-            ['name' => 'Assassin',  'image' => 'images/roles/assasins.png'], // Typo sesuai file asli
+            ['name' => 'Assassin',  'image' => 'images/roles/assasins.png'],
             ['name' => 'Mage',      'image' => 'images/roles/mage.png'],
             ['name' => 'Marksman',  'image' => 'images/roles/marksman.png'],
             ['name' => 'Support',   'image' => 'images/roles/support.png'],
         ];
-        foreach ($roles as $r) { Role::firstOrCreate($r); }
 
-        // 3. POSITIONS (Sesuai Screenshot Folder Positions)
-        $positions = [
+        // Kita tampung hasilnya ke variabel biar bisa dipake buat Hero nanti
+        $roleCollection = collect(); 
+        
+        foreach ($rolesData as $r) { 
+            $role = Role::firstOrCreate($r); 
+            $roleCollection->push($role);
+        }
+
+        // 3. POSITIONS (Sesuai Data Lu)
+        $positionsData = [
             ['name' => 'Roam',      'image' => 'images/positions/roam.png'],
             ['name' => 'Mid Lane',  'image' => 'images/positions/mid.png'],
             ['name' => 'Gold Lane', 'image' => 'images/positions/gold.png'],
             ['name' => 'Exp Lane',  'image' => 'images/positions/exp.png'],
-            ['name' => 'Jungler',   'image' => 'images/positions/jungle.png'], // Typo sesuai file asli
+            ['name' => 'Jungler',   'image' => 'images/positions/jungle.png'],
         ];
-        foreach ($positions as $p) { Position::firstOrCreate($p); }
 
-        // 4. ITEMS
+        $positionCollection = collect();
+
+        foreach ($positionsData as $p) { 
+            $pos = Position::firstOrCreate($p);
+            $positionCollection->push($pos);
+        }
+
+        echo "✅ Role & Position (dengan Gambar) Siap\n";
+
+        // 4. ITEMS (Data Lu Tetap Aman Disini)
         // --- ATTACK ITEMS ---
         $attackItems = [
             ['name' => "Berserker's Fury",       'image' => "images/items/attack/berserker's-fury.png"],
@@ -112,5 +133,30 @@ class DatabaseSeeder extends Seeder
             ['name' => "Warrior Boots",          'image' => "images/items/movement/warrior-boots.png"],
         ];
         foreach ($movementItems as $i) { Item::firstOrCreate(['name' => $i['name']], ['category' => 'Movement', 'image' => $i['image']]); }
+
+        echo "✅ Semua Item Berhasil Dibuat\n";
+
+        // 5. BIKIN 15 HERO DUMMY (YANG BARU KITA TAMBAHKAN)
+        // Kita gunakan ID si Admin Ganteng
+        $heroes = Hero::factory(15)->create([
+            'user_id' => $admin->id 
+        ]);
+
+        // 6. HUBUNGKAN HERO KE ROLE & POSISI (ACAK)
+        foreach ($heroes as $hero) {
+            // Kita ambil role dari $roleCollection yang di atas tadi
+            // Attach 1 atau 2 role acak
+            $hero->roles()->attach(
+                $roleCollection->random(rand(1, 2))->pluck('id')->toArray()
+            );
+
+            // Kita ambil posisi dari $positionCollection yang di atas tadi
+            // Attach 1 posisi acak
+            $hero->positions()->attach(
+                $positionCollection->random(1)->pluck('id')->toArray()
+            );
+        }
+
+        echo "✅ 15 Hero Dummy Berhasil Dibuat & Terhubung ke Role/Position!\n";
     }
 }

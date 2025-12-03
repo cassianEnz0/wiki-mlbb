@@ -45,7 +45,8 @@ class HeroController extends Controller
     public function create()
     {
         $roles = Role::all();
-        $items = Item::all();
+        // UPDATE: Grouping by category
+        $items = Item::all()->groupBy('category');
         $positions = \App\Models\Position::all(); 
         return view('heroes.create', compact('roles', 'items', 'positions'));
     }
@@ -90,7 +91,8 @@ class HeroController extends Controller
     public function edit(Hero $hero)
     {
         $roles = Role::all();
-        $items = Item::all();
+        // UPDATE: Grouping by category
+        $items = Item::all()->groupBy('category');
         $positions = \App\Models\Position::all();
         return view('heroes.edit', compact('hero', 'roles', 'items', 'positions'));
     }
