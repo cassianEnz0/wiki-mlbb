@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-6">
-        <a href="{{ route('dashboard') }}" class="flex items-center text-sm text-gray-500 hover:text-gray-900 transition">
+        <a href="{{ route('dashboard') }}" class="flex items-center text-sm font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="underline text-sm" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 

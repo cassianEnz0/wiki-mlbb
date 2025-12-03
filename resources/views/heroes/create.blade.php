@@ -3,71 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buat Hero Baru</title>
+    <title>Buat Hero Baru - Wiki Legend</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
     <style>
-        /* BASE THEME */
-        body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
-        h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
-        .card { background: #ffffff; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .card-header { background: transparent; border-bottom: 2px solid #e5e7eb; padding: 25px; }
-        .form-control, .form-select { background-color: #f9fafb !important; border: 1px solid #d1d5db !important; color: #111827 !important; padding: 12px; border-radius: 8px; height: 50px !important; }
-        .form-control:focus { background-color: #ffffff !important; border-color: #111827 !important; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); }
-        input[type="file"].form-control { height: auto !important; }
-        label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
-        
-        /* CUSTOM ITEM PICKER STYLE */
-        .item-picker-container { position: relative; width: 100%; }
-        .item-picker-trigger {
-            background-color: #f9fafb; border: 1px solid #d1d5db; border-radius: 8px; min-height: 50px;
-            padding: 8px; display: flex; flex-wrap: wrap; gap: 8px; cursor: pointer; align-items: center;
+        /* === CONFIGURATION VARIABLES === */
+        :root { 
+            --bg-body: #f3f4f6; 
+            --bg-card: #ffffff; 
+            --text-main: #1f2937; 
+            --border-color: #e5e7eb; 
+            --input-bg: #ffffff; 
+            --input-border: #9ca3af;
+            
+            /* Category Headers (Light Mode) */
+            --cat-bg: #e2e8f0; 
+            --cat-text: #374151;
+            
+            /* Buttons (Light Mode) */
+            --btn-cancel-bg: #9ca3af;
+            --btn-cancel-text: #ffffff;
         }
-        .item-picker-trigger:hover { border-color: #9ca3af; }
-        .item-picker-dropdown {
-            display: none; position: absolute; top: 105%; left: 0; width: 600px; /* Lebar dropdown */
-            background: white; border: 1px solid #d1d5db; border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            z-index: 1050; overflow: hidden; height: 320px; /* Tinggi Fix */
-        }
-        .item-picker-dropdown.active { display: flex; }
-        
-        /* Kolom Kiri: Kategori */
-        .picker-categories { width: 30%; background: #f3f4f6; border-right: 1px solid #e5e7eb; overflow-y: auto; }
-        .cat-item { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 0.85rem; color: #4b5563; transition: all 0.2s; border-left: 3px solid transparent; }
-        .cat-item::first-letter {text-transform: uppercase;}
-        .cat-item:hover { background: #e5e7eb; color: #111827; }
-        .cat-item.active { background: white; color: #2563eb; border-left-color: #2563eb; }
+    
+        /* === DARK MODE VARIABLES === */
+        html.dark { 
+            --bg-body: #050914;       
+            --bg-card: #0f172a;       
+            --text-main: #ffffff;     
+            --border-color: #facc15;  
+            --input-bg: #1e293b;      
+            --input-border: #64748b;  
+            
+            /* Category Headers (Dark Mode) */
+            --cat-bg: #334155;
+            --cat-text: #facc15;
 
-        /* Kolom Kanan: Grid Item */
-        .picker-items { width: 70%; padding: 16px; overflow-y: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-content: start; }
-        .item-card { 
-            border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
+            /* Buttons (Dark Mode) */
+            --btn-cancel-bg: #334155;
+            --btn-cancel-text: #cbd5e1;
         }
-        .item-card:hover { border-color: #2563eb; transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .item-card.selected { background-color: #eff6ff; border-color: #2563eb; }
-        .item-card img { width: 32px; height: 32px; object-fit: contain; margin-bottom: 6px; }
-        .item-card span { display: block; font-size: 0.7rem; line-height: 1.2; font-weight: 600; color: #374151; }
+    
+        body { 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            font-family: 'Poppins', sans-serif; /* Default Font Clean */
+            transition: background-color 0.3s, color 0.3s; 
+        }
+
+        .card { 
+            background-color: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
         
-        /* Badge Item Terpilih di Input */
-        .selected-badge {
-            background: #fff; border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 10px 4px 6px;
-            font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;
+        /* HEADER TYPOGRAPHY (Decorative) */
+        h4, h5 { 
+            font-family: 'Cinzel', serif; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
         }
-        .selected-badge img { width: 20px; height: 20px; object-fit: contain; border-radius: 4px; }
-        .remove-item { color: #ef4444; cursor: pointer; font-weight: bold; font-size: 1rem; line-height: 1; }
-        .remove-item:hover { color: #dc2626; }
-        .placeholder-text { color: #9ca3af; font-style: italic; font-size: 0.9rem; margin-left: 8px; }
+        html.dark h4, html.dark h5 { 
+            color: #facc15; 
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.3); 
+        }
 
-        .btn-primary { background-color: #111827; border: none; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
-        .btn-outline-secondary { color: #4b5563; border-color: #d1d5db; padding: 10px 24px; border-radius: 8px; }
+        /* LABELS (Clean Font) */
+        .form-label { 
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            color: #4b5563; 
+        }
+        html.dark .form-label { color: #facc15; }
 
-        /* KHUSUS ROLE & POSISI: HILANGKAN KOLOM KATEGORI */
-        .picker-no-cat .picker-categories { display: none !important; }
-        .picker-no-cat .picker-items { width: 100% !important; }
+        /* INPUT FIELDS */
+        .form-control { 
+            background-color: var(--input-bg) !important; 
+            border: 2px solid var(--input-border) !important; 
+            color: var(--text-main) !important; 
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-control::placeholder { color: #9ca3af; opacity: 1; }
+        html.dark .form-control::placeholder { color: #64748b; }
+        .form-control:focus { 
+            box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.25); 
+            border-color: #facc15 !important; 
+        }
+
+        /* PICKER BOX */
+        .picker-box { 
+            background-color: var(--input-bg); 
+            border: 2px solid var(--input-border); 
+            color: var(--text-main);
+            border-radius: 8px; 
+            padding: 12px; 
+            min-height: 50px; 
+            cursor: pointer; 
+            display: flex; flex-wrap: wrap; gap: 8px; align-items: center; 
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        .picker-box:hover { border-color: #f59e0b; }
+        html.dark .picker-box:hover { border-color: #facc15; }
+
+        /* DROPDOWN */
+        .picker-dropdown { 
+            position: absolute; 
+            background: var(--bg-card); 
+            border: 2px solid var(--border-color); 
+            z-index: 1050; width: 100%; max-height: 400px; overflow-y: auto; display: none; 
+            border-radius: 8px; margin-top: 5px; padding: 10px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); 
+        }
+        .picker-dropdown.show { display: block; }
+
+        /* CATEGORY HEADER (FIXED: Dynamic Colors) */
+        .category-header {
+            background-color: var(--cat-bg);
+            color: var(--cat-text);
+            font-family: 'Cinzel', serif; /* Decorative font fits headers */
+            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 12px 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* ITEMS GRID */
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+
+        .picker-item { 
+            text-align: center; padding: 8px; border: 1px solid transparent; border-radius: 6px; cursor: pointer; 
+            color: var(--text-main); font-size: 0.7rem; font-weight: 600; font-family: 'Poppins', sans-serif;
+        }
+        .picker-item:hover { background-color: rgba(128, 128, 128, 0.1); }
+        html.dark .picker-item:hover { border-color: #facc15; }
+        
+        .picker-item img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px; display: block; margin: 0 auto; }
+        
+        .picker-item.selected { 
+            background-color: rgba(250, 204, 21, 0.15); 
+            border: 1px solid #facc15; 
+            color: #d97706; 
+        }
+        html.dark .picker-item.selected { color: #facc15; }
+
+        /* SELECTED BADGE */
+        .selected-badge { 
+            background: rgba(128, 128, 128, 0.1); border: 1px solid var(--border-color); color: var(--text-main); 
+            padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; font-family: 'Poppins', sans-serif;
+        }
+        html.dark .selected-badge { 
+            background: rgba(66, 32, 6, 0.5); 
+            border-color: #facc15; 
+            color: #facc15; 
+        }
+
+        /* BUTTONS (FIXED FONTS & COLORS) */
+        .btn {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        /* Primary Button (Save) */
+        .btn-primary { background-color: #1f2937; color: white; }
+        html.dark .btn-primary { background-color: #facc15; color: #000; }
+        html.dark .btn-primary:hover { background-color: #eab308; }
+
+        /* Secondary Button (Cancel/Batal) */
+        .btn-secondary { background-color: var(--btn-cancel-bg); color: var(--btn-cancel-text); }
+        .btn-secondary:hover { opacity: 0.9; }
+        html.dark .btn-secondary { border: 1px solid #475569; }
+
+        /* Summernote Fixes */
+        html.dark .note-editor { border-color: var(--input-border); }
+        html.dark .note-toolbar { background-color: #1e293b; border-bottom: 1px solid #475569; }
+        html.dark .note-editing-area { background-color: #0f172a; color: #ffffff; }
+        html.dark .note-placeholder { color: #94a3b8; }
+        html.dark .note-btn { color: white; background: #334155; }
     </style>
 </head>
 <body class="py-5">
@@ -75,74 +202,68 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <div class="card">
-                <div class="card-header"><h4>Buat Hero Baru</h4></div>
-                <div class="card-body p-5">
+            <div class="card mb-5">
+                <div class="card-header py-4 px-4 border-bottom">
+                    <h4 class="m-0">Create New Hero</h4>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    
                     @if ($errors->any())
-                        <div class="alert alert-danger mb-4"><ul class="mb-0 small">@foreach ($errors->all() as $e) <li>{{ $e }}</li> @endforeach</ul></div>
+                        <div class="alert alert-danger"><ul class="mb-0">@foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach</ul></div>
                     @endif
 
                     <form action="{{ route('heroes.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        
                         <div class="row g-5">
                             <div class="col-md-5">
-                                <h5 class="mb-4 border-bottom pb-2">Identitas Hero</h5>
-                                <div class="mb-4"><label>Nama Hero</label><input type="text" name="name" class="form-control" required></div>
-                                <div class="mb-4"><label>Foto Potret</label><input type="file" name="photo" class="form-control" accept="image/*" required></div>
+                                <h5 class="mb-3 border-bottom pb-2">Identitas Hero</h5>
                                 
-                                <div class="mb-4">
-                                    <label>Role</label>
-                                    <div class="item-picker-container picker-no-cat" id="rolePicker">
-                                        <div class="item-picker-trigger" id="roleTrigger">
-                                            <span class="placeholder-text">Pilih Role...</span>
-                                        </div>
-                                        <div class="item-picker-dropdown" id="roleDropdown">
-                                            <div class="picker-categories"></div>
-                                            <div class="picker-items" id="roleItemsContainer"></div>
-                                        </div>
-                                    </div>
-                                    <select name="roles[]" id="realRoleInput" multiple hidden required></select>
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Hero</label>
+                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required placeholder="Contoh: Tigreal">
                                 </div>
 
-                                <div class="mb-4">
-                                    <label>Posisi</label>
-                                    <div class="item-picker-container picker-no-cat" id="posPicker">
-                                        <div class="item-picker-trigger" id="posTrigger">
-                                            <span class="placeholder-text">Pilih Posisi...</span>
-                                        </div>
-                                        <div class="item-picker-dropdown" id="posDropdown">
-                                            <div class="picker-categories"></div>
-                                            <div class="picker-items" id="posItemsContainer"></div>
-                                        </div>
-                                    </div>
-                                    <select name="positions[]" id="realPosInput" multiple hidden required></select>
+                                <div class="mb-3">
+                                    <label class="form-label">Foto Hero</label>
+                                    <input type="file" name="photo" class="form-control">
+                                </div>
+
+                                <div class="mb-3 position-relative">
+                                    <label class="form-label">Role (Bisa lebih dari 1)</label>
+                                    <div class="picker-box" id="roleTrigger">Memuat data...</div>
+                                    <div class="picker-dropdown" id="roleDropdown"></div>
+                                    <select name="roles[]" id="roleInput" multiple hidden></select>
+                                </div>
+
+                                <div class="mb-3 position-relative">
+                                    <label class="form-label">Posisi / Lane</label>
+                                    <div class="picker-box" id="posTrigger">Memuat data...</div>
+                                    <div class="picker-dropdown" id="posDropdown"></div>
+                                    <select name="positions[]" id="posInput" multiple hidden></select>
                                 </div>
                             </div>
 
                             <div class="col-md-7">
-                                <h5 class="mb-4 border-bottom pb-2">Atribut & Kisah</h5>
+                                <h5 class="mb-3 border-bottom pb-2">Atribut & Kisah</h5>
 
-                                <div class="mb-4">
-                                    <label>Rekomendasi Build (Maksimal 6)</label>
-                                    <div class="item-picker-container" id="itemPicker">
-                                        <div class="item-picker-trigger" id="pickerTrigger">
-                                            <span class="placeholder-text">Klik untuk pilih item...</span>
-                                        </div>
-                                        <div class="item-picker-dropdown" id="pickerDropdown">
-                                            <div class="picker-categories" id="pickerCategories"></div>
-                                            <div class="picker-items" id="pickerItems"></div>
-                                        </div>
-                                    </div>
-                                    <select name="items[]" id="realItemInput" multiple hidden required></select>
+                                <div class="mb-3 position-relative">
+                                    <label class="form-label">Rekomendasi Build (Max 6 Item)</label>
+                                    <div class="picker-box" id="itemTrigger">Memuat data...</div>
+                                    <div class="picker-dropdown" id="itemDropdown" style="max-height: 400px;"></div>
+                                    <select name="items[]" id="itemInput" multiple hidden></select>
                                 </div>
 
-                                <div class="mb-4"><label>Kisah / Lore</label><textarea name="story" id="summernote" required></textarea></div>
+                                <div class="mb-3">
+                                    <label class="form-label">Kisah / Lore</label>
+                                    <textarea id="summernote" name="story">{{ old('story') }}</textarea>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="d-flex gap-3 mt-5 pt-4 border-top justify-content-end">
-                            <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">Batal</a>
-                            <button type="submit" class="btn btn-primary">Simpan Hero</button>
+                        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan Hero Baru</button>
                         </div>
                     </form>
                 </div>
@@ -156,137 +277,139 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script>
+    // 1. SETUP DARK MODE & EDITOR
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+
     $(document).ready(function() {
         $('#summernote').summernote({
-            placeholder: 'Tulis legenda hero disini...', tabsize: 2, height: 350,
-            toolbar: [['style',['style']],['font',['bold','underline','clear']],['para',['ul','ol']]]
+            placeholder: 'Tulis legenda hero...', tabsize: 2, height: 300,
+            toolbar: [['style',['style']],['font',['bold','underline','clear']],['para',['ul','ol']],['view',['fullscreen']]]
         });
 
-        function setupPicker(config) {
-            const { data, selectedData, triggerEl, dropdownEl, itemContainerEl, inputEl, hasCategories, maxLimit } = config;
-            let currentSelection = selectedData || [];
+        // 2. DATA DARI CONTROLLER
+        const roles = @json($roles ?? []);
+        const positions = @json($positions ?? []);
+        const items = @json($items ?? []); // Ini sekarang berupa Object Group (Attack: [...], Magic: [...])
+        const baseUrl = "{{ asset('') }}";
 
-            updateTrigger();
+        // DATA LAMA (Untuk Edit Page)
+        const oldRoles = @json(isset($hero) ? $hero->roles->pluck('id') : []);
+        const oldPos = @json(isset($hero) ? $hero->positions->pluck('id') : []);
+        const oldItems = @json(isset($hero) ? $hero->items->pluck('id') : []);
 
-            if (hasCategories) {
-                const catContainer = dropdownEl.find('.picker-categories');
-                let firstCat = null;
-                Object.keys(data).forEach((cat, idx) => {
-                    if(idx===0) firstCat = cat;
-                    catContainer.append(`<div class="cat-item ${idx===0?'active':''}" data-cat="${cat}">${cat}</div>`);
-                });
-                dropdownEl.data('render', function(catName) {
-                    itemContainerEl.empty();
-                    if(data[catName]) data[catName].forEach(item => appendItemCard(item));
-                });
-                dropdownEl.data('render')(firstCat);
-                dropdownEl.on('click', '.cat-item', function() {
-                    dropdownEl.find('.cat-item').removeClass('active');
-                    $(this).addClass('active');
-                    dropdownEl.data('render')($(this).data('cat'));
-                });
-            } else {
-                itemContainerEl.empty();
-                data.forEach(item => appendItemCard(item));
-            }
-
-            function appendItemCard(item) {
-                const isSelected = currentSelection.find(i => i.id == item.id);
+        // 3. FUNGSI PICKER (BISA MENANGANI KATEGORI)
+        function setupPicker(triggerId, dropdownId, inputId, dataSource, selectedIdsRaw = [], maxSelect = null) {
+            const $trigger = $(triggerId);
+            const $dropdown = $(dropdownId);
+            const $input = $(inputId);
+            let currentSelection = selectedIdsRaw.map(String);
+            
+            // FUNGSI RENDER ITEM (DIGUNAKAN BERULANG)
+            function renderItemHTML(obj) {
+                let imgPath = obj.image;
+                if (imgPath && !imgPath.startsWith('http')) imgPath = baseUrl + imgPath;
+                
+                const isSelected = currentSelection.includes(String(obj.id));
                 const activeClass = isSelected ? 'selected' : '';
-                itemContainerEl.append(`
-                    <div class="item-card ${activeClass}" data-id="${item.id}" data-name="${item.name}" data-img="${item.image}">
-                        <img src="{{ asset('') }}${item.image}">
-                        <span>${item.name}</span>
+
+                return `
+                    <div class="picker-item ${activeClass}" data-id="${obj.id}" data-name="${obj.name}">
+                        ${imgPath ? `<img src="${imgPath}">` : ''}
+                        <span>${obj.name}</span>
                     </div>
-                `);
+                `;
             }
 
-            function updateTrigger() {
-                triggerEl.empty();
-                inputEl.empty();
-                if (currentSelection.length === 0) {
-                    triggerEl.html('<span class="placeholder-text">Klik untuk pilih...</span>');
+            // RESET DROPDOWN
+            $dropdown.empty();
+
+            // LOGIKA RENDERING: CEK APAKAH ARRAY ATAU OBJECT (GROUP)
+            if (Array.isArray(dataSource)) {
+                // KASUS 1: Data Datar (Role & Position)
+                let html = '<div class="items-grid">';
+                dataSource.forEach(obj => { html += renderItemHTML(obj); });
+                html += '</div>';
+                $dropdown.append(html);
+
+            } else {
+                // KASUS 2: Data Group (Items dengan Kategori)
+                // Loop setiap Kategori (Attack, Magic, Defense, dll)
+                Object.keys(dataSource).forEach(category => {
+                    // Judul Kategori
+                    $dropdown.append(`<div class="category-header">${category}</div>`);
+                    
+                    // Grid Item di bawah kategori tersebut
+                    let html = '<div class="items-grid">';
+                    dataSource[category].forEach(obj => { html += renderItemHTML(obj); });
+                    html += '</div>';
+                    $dropdown.append(html);
+                });
+            }
+
+            // UPDATE TAMPILAN AWAL TRIGGER
+            updateTriggerUI();
+
+            // EVENT HANDLERS
+            $trigger.off('click').on('click', function(e) {
+                e.stopPropagation();
+                $('.picker-dropdown').not($dropdown).removeClass('show');
+                $dropdown.toggleClass('show');
+            });
+
+            $dropdown.off('click', '.picker-item').on('click', '.picker-item', function(e) {
+                e.stopPropagation();
+                const id = String($(this).data('id'));
+
+                if (currentSelection.includes(id)) {
+                    currentSelection = currentSelection.filter(x => x !== id);
+                    $(this).removeClass('selected');
                 } else {
-                    currentSelection.forEach(item => {
-                        triggerEl.append(`
-                            <div class="selected-badge">
-                                <img src="{{ asset('') }}${item.img}"> ${item.name}
-                                <span class="remove-item" data-id="${item.id}">&times;</span>
-                            </div>
-                        `);
-                        inputEl.append(`<option value="${item.id}" selected>${item.name}</option>`);
+                    if (maxSelect && currentSelection.length >= maxSelect) { alert('Maksimal ' + maxSelect + ' item!'); return; }
+                    currentSelection.push(id);
+                    $(this).addClass('selected');
+                }
+                updateTriggerUI();
+            });
+
+            // FUNGSI UPDATE UI TRIGGER
+            function updateTriggerUI() {
+                $input.empty();
+                $trigger.empty();
+
+                if (currentSelection.length === 0) {
+                    $trigger.text('Pilih...');
+                } else {
+                    currentSelection.forEach(selId => {
+                        // Cari data item (Agak rumit karena bisa di dalam group atau array biasa)
+                        let itemData = null;
+                        
+                        if (Array.isArray(dataSource)) {
+                            itemData = dataSource.find(x => String(x.id) === selId);
+                        } else {
+                            // Cari di dalam setiap kategori
+                            Object.values(dataSource).forEach(group => {
+                                const found = group.find(x => String(x.id) === selId);
+                                if (found) itemData = found;
+                            });
+                        }
+
+                        if (itemData) {
+                            $trigger.append(`<div class="selected-badge">${itemData.name}</div>`);
+                            $input.append(`<option value="${itemData.id}" selected>${itemData.id}</option>`);
+                        }
                     });
                 }
             }
-
-            triggerEl.on('click', function(e) {
-                if(!$(e.target).hasClass('remove-item')) {
-                    $('.item-picker-dropdown').not(dropdownEl).removeClass('active');
-                    dropdownEl.toggleClass('active');
-                }
-            });
-
-            dropdownEl.on('click', '.item-card', function(e) {
-                e.stopPropagation();
-                const id = $(this).data('id');
-                const name = $(this).data('name');
-                const img = $(this).data('img');
-                const index = currentSelection.findIndex(i => i.id == id);
-
-                if (index > -1) {
-                    currentSelection.splice(index, 1);
-                    $(this).removeClass('selected');
-                } else {
-                    if (maxLimit && currentSelection.length >= maxLimit) { alert('Maksimal ' + maxLimit + ' pilihan!'); return; }
-                    currentSelection.push({ id, name, img });
-                    $(this).addClass('selected');
-                }
-                updateTrigger();
-                if (maxLimit && currentSelection.length >= maxLimit) dropdownEl.removeClass('active');
-            });
-
-            triggerEl.on('click', '.remove-item', function(e) {
-                e.stopPropagation();
-                const id = $(this).data('id');
-                currentSelection = currentSelection.filter(i => i.id != id);
-                updateTrigger();
-                dropdownEl.find(`.item-card[data-id="${id}"]`).removeClass('selected');
-            });
         }
 
-        const itemsData = @json($items);
-        let selectedItems = [];
-        try { @if(isset($hero)) selectedItems = @json($hero->items->map(fn($i) => ['id'=>$i->id, 'name'=>$i->name, 'img'=>$i->image])); @endif } catch(e){}
-        
-        setupPicker({
-            data: itemsData, selectedData: selectedItems,
-            triggerEl: $('#pickerTrigger'), dropdownEl: $('#pickerDropdown'), itemContainerEl: $('#pickerItems'), inputEl: $('#realItemInput'),
-            hasCategories: true, maxLimit: 6
-        });
+        // JALANKAN PICKER
+        setupPicker('#roleTrigger', '#roleDropdown', '#roleInput', roles, oldRoles);
+        setupPicker('#posTrigger', '#posDropdown', '#posInput', positions, oldPos);
+        setupPicker('#itemTrigger', '#itemDropdown', '#itemInput', items, oldItems, 6);
 
-        const rolesData = @json($roles);
-        let selectedRoles = [];
-        try { @if(isset($hero)) selectedRoles = @json($hero->roles->map(fn($r) => ['id'=>$r->id, 'name'=>$r->name, 'img'=>$r->image])); @endif } catch(e){}
-
-        setupPicker({
-            data: rolesData, selectedData: selectedRoles,
-            triggerEl: $('#roleTrigger'), dropdownEl: $('#roleDropdown'), itemContainerEl: $('#roleItemsContainer'), inputEl: $('#realRoleInput'),
-            hasCategories: false, maxLimit: null 
-        });
-
-        const posData = @json($positions);
-        let selectedPos = [];
-        try { @if(isset($hero)) selectedPos = @json($hero->positions->map(fn($p) => ['id'=>$p->id, 'name'=>$p->name, 'img'=>$p->image])); @endif } catch(e){}
-
-        setupPicker({
-            data: posData, selectedData: selectedPos,
-            triggerEl: $('#posTrigger'), dropdownEl: $('#posDropdown'), itemContainerEl: $('#posItemsContainer'), inputEl: $('#realPosInput'),
-            hasCategories: false, maxLimit: null
-        });
-
-        $(document).on('click', function(e) {
-            if (!$(e.target).closest('.item-picker-container').length) $('.item-picker-dropdown').removeClass('active');
-        });
+        $(document).on('click', function() { $('.picker-dropdown').removeClass('show'); });
     });
 </script>
 </body>

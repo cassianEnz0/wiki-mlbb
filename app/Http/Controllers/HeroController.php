@@ -23,33 +23,28 @@ class HeroController extends Controller
     }
 
     // =========================
-    // 1. TAMPILKAN LIST HERO + SEARCH + FILTER + PAGINATION
+    // 1. TAMPILKAN LIST HERO
     // =========================
     public function index()
     {
-        // Start Query with Eager Loading
         $heroes = Hero::with(['roles', 'positions'])->latest();
 
-        // Filter: Search Name
         if (request('search')) {
             $heroes->where('name', 'like', '%' . request('search') . '%');
         }
 
-        // Filter: Role (e.g. Mage)
         if (request('role')) {
             $heroes->whereHas('roles', function ($query) {
                 $query->where('name', request('role'));
             });
         }
 
-        // Filter: Lane (e.g. Mid Lane)
         if (request('lane')) {
             $heroes->whereHas('positions', function ($query) {
                 $query->where('name', 'like', '%' . request('lane') . '%');
             });
         }
 
-        // Get Data (10 per page) and keep filters in URL (appends)
         $heroes = $heroes->paginate(10)->appends(request()->all());
 
         return view('dashboard', compact('heroes'));
@@ -61,7 +56,8 @@ class HeroController extends Controller
     public function create()
     {
         $roles = Role::all();
-        $items = Item::all()->groupBy('category'); // Group items nicely
+        // KEMBALIKAN ->groupBy('category') DI SINI
+        $items = Item::all()->groupBy('category'); 
         $positions = Position::all();
 
         return view('heroes.create', compact('roles', 'items', 'positions'));
@@ -104,7 +100,6 @@ class HeroController extends Controller
     public function show(Hero $hero)
     {
         $hero->load(['roles', 'items', 'positions', 'author']);
-
         return view('heroes.show', compact('hero'));
     }
 
@@ -114,6 +109,7 @@ class HeroController extends Controller
     public function edit(Hero $hero)
     {
         $roles = Role::all();
+        // KEMBALIKAN ->groupBy('category') DI SINI JUGA
         $items = Item::all()->groupBy('category');
         $positions = Position::all();
 
@@ -138,7 +134,6 @@ class HeroController extends Controller
             if ($hero->photo) {
                 Storage::disk('public')->delete($hero->photo);
             }
-
             $photoPath = $request->file('photo')->store('heroes', 'public');
         } else {
             $photoPath = $hero->photo;
@@ -166,9 +161,8 @@ class HeroController extends Controller
         if ($hero->photo) {
             Storage::disk('public')->delete($hero->photo);
         }
-
         $hero->delete();
-
         return redirect()->route('dashboard')->with('success', 'Hero telah dihapus!');
     }
+
 }
