@@ -54,3 +54,4 @@ Route::get('/heroes/{hero}', [HeroController::class, 'show'])->name('heroes.show
 
 
 require __DIR__.'/auth.php';
+
