@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
 
         // Tampung hasilnya ke variabel biar bisa dipake buat Hero nanti
         $roleCollection = collect(); 
-        
+
         foreach ($rolesData as $r) { 
             $role = Role::firstOrCreate($r); 
             $roleCollection->push($role);
@@ -133,13 +133,12 @@ class DatabaseSeeder extends Seeder
             ['name' => "Warrior Boots",          'image' => "images/items/movement/warrior-boots.png"],
         ];
         foreach ($movementItems as $i) { Item::firstOrCreate(['name' => $i['name']], ['category' => 'Movement', 'image' => $i['image']]); }
-
-
-    // HERO 1: Alucard
+        
+        // HERO 1: Alucard
     $h1 = Hero::create([
         'name' => 'Alucard',
         'slug' => 'alucard-jU3W4',
-        'photo' => 'images/heroes/dViCtonBqUkd02oplSbhntpJJO4NVTVG98Z0iBPb.jpg',
+        'photo' => 'heroes/dViCtonBqUkd02oplSbhntpJJO4NVTVG98Z0iBPb.jpg',
         'story' => '
     Demon Hunter
     \"The last great war is a glorious memory for the Moniyans. The powerful Light\'s Order, together with the Imperial Border Guards, wiped out the demonic strongholds at the Moniyan and Barren Lands pass, driving the fiends back to the hinterlands of the Forsaken Wastes. But for young Alucard, the war was nothing but a terrible memory of pain and misery. His father\'s second regiment suffered heavy losses due to a rash lone advance. Alucard\'s father disappeared in the battle, and was later declared dead by the Light\'s Order.
@@ -175,7 +174,7 @@ class DatabaseSeeder extends Seeder
     $h2 = Hero::create([
         'name' => 'Hayabusa',
         'slug' => 'hayabusa-gGDWF',
-        'photo' => 'images/heroes/eXHBeAhi4rB3qdZPaEhPqCSTe27zF7NAm8StziO7.jpg',
+        'photo' => 'heroes/eXHBeAhi4rB3qdZPaEhPqCSTe27zF7NAm8StziO7.jpg',
         'story' => '
     Shadow and Moon
     As the second heir to the Shadow Sect of the Scarlet Shadow, Hayabusa had always looked up to his brother, a figure who he saw as the moon itself. To preserve the delicate balance of power between the Shadow and Scarlet Sects, Hayabusa willingly took his brother\'s place to be a political pawn and hostage, to be raised within the rival Scarlet Sect. Every day spent in the Scarlet Sect, Hayabusa lived by his brother\'s principles. He mastered his unique Shadow Shuriken technique and forged an unbreakable bond with Hanabi, a kunoichi of the Scarlet Sect. But when Hanzo\'s betrayal and his brother\'s disappearance shattered their hopes for peace, Hayabusa realized that the moonlight that had always guided him was gone. Yet, he gripped his blade firmly, determined to forge ahead through the shadows, following his brother\'s nindo.
@@ -251,7 +250,7 @@ class DatabaseSeeder extends Seeder
     $h3 = Hero::create([
         'name' => 'Khaleed',
         'slug' => 'khaleed-Q3MCI',
-        'photo' => 'images/heroes/0zSlEWqsVxTMi91xyX9Ma6bgeOUbnWvYhhfrFCzM.jpg',
+        'photo' => 'heroes/0zSlEWqsVxTMi91xyX9Ma6bgeOUbnWvYhhfrFCzM.jpg',
         'story' => '
     Desert Scimitar
     There was an ancient tribe that lived on the desert-like Agelta Drylands. They built villages along the Emerald Road and were able to pass down their civilization and legacy.
@@ -299,7 +298,7 @@ class DatabaseSeeder extends Seeder
     $h4 = Hero::create([
         'name' => 'Zhuxin',
         'slug' => 'zhuxin-XIKYd',
-        'photo' => 'images/heroes/9kOVpUzKuBb3lFocwt3Q1SjkWvpmPNOFcIkhCGHo.jpg',
+        'photo' => 'heroes/9kOVpUzKuBb3lFocwt3Q1SjkWvpmPNOFcIkhCGHo.jpg',
         'story' => '
     Beacon of Spirits
     The city of Zhu\'an, a dreamlike place where the supernatural can be found in every nook and cranny.
@@ -367,7 +366,7 @@ class DatabaseSeeder extends Seeder
     $h5 = Hero::create([
         'name' => 'Lancelot',
         'slug' => 'lancelot-9nhx7',
-        'photo' => 'images/heroes/bIog94Gx2yqysf9AnpCzRolo4n6Hi4Y4E44jq1k1.jpg',
+        'photo' => 'heroes/bIog94Gx2yqysf9AnpCzRolo4n6Hi4Y4E44jq1k1.jpg',
         'story' => '
     Blade of Roses
     In the west of the Moniyan Empire lay Castle Gorge that had fallen into decline due to the depletion of its famed gold mines.
@@ -429,7 +428,7 @@ class DatabaseSeeder extends Seeder
     $h6 = Hero::create([
         'name' => 'Helcurt',
         'slug' => 'helcurt-lEpsc',
-        'photo' => 'images/heroes/VFMQW4ys60NpVCYwpEgaSc5WrJL3sHC6B7ncMCST.jpg',
+        'photo' => 'heroes/VFMQW4ys60NpVCYwpEgaSc5WrJL3sHC6B7ncMCST.jpg',
         'story' => '
     Shadowbringer
     In the historical records of the Land of Dawn, there was said to be a mysterious race who had sacrificed their souls to the ruler of the Abyss, in exchange for great power. Their bodies were transformed using dark magic, granting them the ability to swallow light and travel through space in the blink of an eye, allowing them to surprise their enemies with deadly sneak attacks. What was most terrifying about them, however, was the concoction of naturally toxic poison stingers emitted from their tails. For those unfortunate enough to come into contact with this poison would soon be saying their last words.
@@ -453,7 +452,7 @@ class DatabaseSeeder extends Seeder
     $h7 = Hero::create([
         'name' => 'Franco',
         'slug' => 'franco-JVcWI',
-        'photo' => 'images/heroes/QxCRpgo15I6jQsHFU0dqa6IPYD90tEhM2buoot7O.jpg',
+        'photo' => 'heroes/QxCRpgo15I6jQsHFU0dqa6IPYD90tEhM2buoot7O.jpg',
         'story' => '
     Frozen Warrior
     The harsh natural environment of the distant and wintry Northern Vale shaped those who live there into a brave and martial people. They revered the strong, and took pride in their tall and rugged appearances. They believed that their robust physiques were inherited from their common ancestor ⁠— the Iceland Golem who once ruled these lands.
@@ -495,7 +494,7 @@ class DatabaseSeeder extends Seeder
     $h8 = Hero::create([
         'name' => 'Melissa',
         'slug' => 'melissa-FxOR3',
-        'photo' => 'images/heroes/HfkxUUpK6jvfOt6tsGyUkQtuuqsC5jNO4olEyHoZ.jpg',
+        'photo' => 'heroes/HfkxUUpK6jvfOt6tsGyUkQtuuqsC5jNO4olEyHoZ.jpg',
         'story' => '
     Cursed Needle
     There used to be an inconspicuous little tailor shop on the busy streets of the Lumina City, capital of the Moniyan Empire. Its owner was an elegant woman always with a weary smile on her face, who had a clever, quirky daughter named Melissa.
@@ -565,7 +564,7 @@ class DatabaseSeeder extends Seeder
     $h9 = Hero::create([
         'name' => 'Layla',
         'slug' => 'layla-XARBC',
-        'photo' => 'images/heroes/FMdneEjnsEPSjPqr83F9PgffWA7yJj9oMiFK0VRq.png',
+        'photo' => 'heroes/FMdneEjnsEPSjPqr83F9PgffWA7yJj9oMiFK0VRq.png',
         'story' => '
     Energy Gunner
     \"Layla Grant, a prominent member of the Eruditio Rangers, bravely protected the core of Eruditio tech—the Starlium Reactor, during a vicious attack on Eruditio just a day earlier. While her actions protected civilization, they also proved that the youth of the city possessed resilience and perseverance and that the love and belonging for this home they shared was the life force flowing through the veins of Eruditians. Thus, the honorary title of \"Shining Star\" was given to her.
@@ -602,7 +601,7 @@ class DatabaseSeeder extends Seeder
     $h10 = Hero::create([
         'name' => 'Saber',
         'slug' => 'saber-u8JLn',
-        'photo' => 'images/heroes/vRNU0dL8IEwsbOsXcggoq73ABxWjsChqEXxSMPhq.jpg',
+        'photo' => 'heroes/vRNU0dL8IEwsbOsXcggoq73ABxWjsChqEXxSMPhq.jpg',
         'story' => '
     Wandering Sword
     \"Deep in the northern mountains of the Cadia Riverlands lies a quiet and peaceful village. This village is home to the legendary Tianyin Swordmaster Sect, and is also the place where Duan Meng spent his childhood perfecting his technique.
@@ -650,7 +649,7 @@ class DatabaseSeeder extends Seeder
     $h11 = Hero::create([
         'name' => 'Lesley',
         'slug' => 'lesley-jAZch',
-        'photo' => 'images/heroes/I9vZm0vY8VHQfxktLI0Wcv7b8NNQ5CvH0C9SuSYM.jpg',
+        'photo' => 'heroes/I9vZm0vY8VHQfxktLI0Wcv7b8NNQ5CvH0C9SuSYM.jpg',
         'story' => '
     Deadly Sniper
     Lesley grew up in the Vance household, where her father presided over the noble family\'s security. During an unexpected attack by a rival family, Lesley\'s father was killed. As the assailants approached the Vance household, Lesley took up her father\'s black long rifle and fulfilled her late father\'s mission. Tears rolled down Lesley\'s cheeks as she fired shot after shot, surprisingly, each one taking down an assassin. The final tear came as the final shot took down the last of the rival family\'s men.
@@ -670,7 +669,7 @@ class DatabaseSeeder extends Seeder
     $h12 = Hero::create([
         'name' => 'Ling',
         'slug' => 'ling-obGQ8',
-        'photo' => 'images/heroes/uJA6icdocfPShkT49s6LPEkotcGgwiZ1amVlBQsP.jpg',
+        'photo' => 'heroes/uJA6icdocfPShkT49s6LPEkotcGgwiZ1amVlBQsP.jpg',
         'story' => '
     Cyan Finch
     At the top of the mountains enshrouded by clouds, lies the entrance to the Hidden Land of the Dragon – the “Sky Arch”. Beside the Sky Arch stood many assassins in black. The cyan embroidery etched on their clothes identified them to being part of the most mysterious assassin faction of the Cadia Riverlands, the “Finch”. Legends say, it’s impossible to escape from claws of the “Finch”.
@@ -700,7 +699,7 @@ class DatabaseSeeder extends Seeder
     $h13 = Hero::create([
         'name' => 'Gusion',
         'slug' => 'gusion-mUUzw',
-        'photo' => 'images/heroes/8UaXGOzdnKPSUdIq8ymF6Sz8rugDiyhAHFSe2QrR.jpg',
+        'photo' => 'heroes/8UaXGOzdnKPSUdIq8ymF6Sz8rugDiyhAHFSe2QrR.jpg',
         'story' => '
     Holy Blade
     House Paxley ruled over Castle Aberleen in the south of Moniyan. Generations of the house had guarded these areas for the Moniyan Empire, defending against the invasion of the Abyss.
@@ -760,7 +759,7 @@ class DatabaseSeeder extends Seeder
     $h14 = Hero::create([
         'name' => 'Hanzo',
         'slug' => 'hanzo-pEcx3',
-        'photo' => 'images/heroes/w0xGlrit90e5bJIauPj8LDYD2m5RA8F2Gm9qnUrv.jpg',
+        'photo' => 'heroes/w0xGlrit90e5bJIauPj8LDYD2m5RA8F2Gm9qnUrv.jpg',
         'story' => '
     Akuma Ninja
     Long ago, the House of Akakage was hailed as the Gods of Ninja Arts. For generations, the Akakages researched and taught advanced ninjutsu. In order to achieve the pinnacle of ninja arts, the Akakages used forbidden ninjutsu to rid their hearts of evil, anger, and greed by condensing them into a demon called, Hanekage. No one expected that Hanekage would have consciousness despite lurking within their bodies.
@@ -783,7 +782,5 @@ class DatabaseSeeder extends Seeder
     $h14->roles()->attach([3, 6]);
     $h14->positions()->attach([1, 5]);
     $h14->items()->attach([2, 4, 7, 10, 11, 49]);
-
-
     }
 }

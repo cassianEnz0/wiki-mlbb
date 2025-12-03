@@ -76,7 +76,7 @@
                     <!-- Gambar Hero -->
                     <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200">
                         @if($hero->photo)
-                            <img src="{{ asset('storage/' . $hero->photo) }}" class="w-full h-full object-cover object-top" alt="{{ $hero->name }}">
+                            <img src="{{ asset('storage/' . $hero->photo) }}">
                         @else
                             <div class="flex items-center justify-center h-full text-gray-400">No Photo</div>
                         @endif
@@ -146,7 +146,7 @@
             @auth
                 <div class="mt-4 flex justify-end">
                     <a href="{{ route('heroes.export.excel') }}"
-                       class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition text-sm font-semibold">
+                    class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition text-sm font-semibold">
                         Export Excel
                     </a>
                 </div>
