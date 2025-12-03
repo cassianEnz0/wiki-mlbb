@@ -1,33 +1,5 @@
 <x-app-layout>
     
-    <div class="fixed left-6 top-1/3 flex flex-col gap-4 z-50 hidden lg:flex">
-        @auth
-            <a href="{{ route('heroes.edit', $hero->id) }}" 
-               class="w-12 h-12 bg-yellow-400 hover:bg-yellow-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white dark:border-gray-700 transition transform hover:scale-105" 
-               title="Edit Page">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-            </a>
-        @else
-            <a href="{{ route('login') }}" 
-               class="w-12 h-12 bg-gray-800 dark:bg-yellow-600 hover:bg-gray-700 dark:hover:bg-yellow-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white dark:border-gray-700 transition transform hover:scale-105" 
-               title="Login to Edit">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white dark:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-            </a>
-        @endauth
-
-        <a href="{{ route('dashboard') }}" 
-           class="w-12 h-12 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full flex items-center justify-center shadow-lg border-2 border-white dark:border-gray-600 transition transform hover:scale-105" 
-           title="Back to Dashboard">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </a>
-    </div>
-
     <div class="py-12 bg-gray-100 dark:bg-[#060b19] min-h-screen transition-colors duration-300">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
@@ -35,7 +7,9 @@
                 <div class="p-6 bg-white dark:bg-[#0f172a] border-b border-gray-200 dark:border-gray-800">
                     
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-gray-100 dark:border-gray-700 pb-6 mb-8 gap-4">
+                        
                         <div>
+                        
                             <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
                                 {{ $hero->name }}
                             </h1>
@@ -48,13 +22,24 @@
 
                         <div>
                             @auth
-                                <a href="{{ route('heroes.edit', $hero->id) }}" 
-                                   class="text-sm font-bold text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200 uppercase flex items-center gap-1 transition decoration-transparent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                    </svg>
-                                    Edit This Page
-                                </a>
+                                <div class="flex items-center justify-end mb-4">
+                                    <a href="{{ route('heroes.edit', $hero->id) }}" 
+                                    class="text-sm font-bold text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200 uppercase flex items-center gap-1 transition decoration-transparent mr-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                        </svg>
+                                        Edit This Page
+                                    </a>
+
+                                    <a href="{{ route('dashboard') }}" 
+                                    class="text-sm font-bold text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200 uppercase flex items-center gap-1 transition decoration-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                        Kembali
+                                    </a>
+                                </div>
+
                             @else
                                 <a href="{{ route('login') }}" 
                                    class="text-xs font-bold text-yellow-900 hover:text-black uppercase flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 px-5 py-2 rounded-full transition shadow-sm decoration-transparent">

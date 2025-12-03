@@ -19,11 +19,8 @@ class HeroController extends Controller
     {
         return Excel::download(new HeroesExport, 'heroes.xlsx');
     }
-    // =========================
-    // 1. TAMPILKAN LIST HERO
-    // =========================
 
-    // 1. TAMPILKAN LIST HERO + SEARCH + FILTER + PAGINATION
+    // 1. LIST HERO + SEARCH + FILTER + PAGINATION
 
     public function index()
     {
@@ -55,7 +52,6 @@ class HeroController extends Controller
     public function create()
     {
         $roles = Role::all();
-        // PENTING: Gunakan groupBy('category') agar item terkelompok
         $items = Item::all()->groupBy('category'); 
         $positions = Position::all();
 
@@ -105,7 +101,6 @@ class HeroController extends Controller
     public function edit(Hero $hero)
     {
         $roles = Role::all();
-        // PENTING: Gunakan groupBy('category') di sini juga
         $items = Item::all()->groupBy('category');
         $positions = Position::all();
 
