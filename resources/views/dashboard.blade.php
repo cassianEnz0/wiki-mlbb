@@ -68,7 +68,7 @@
 
                     <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200 dark:bg-gray-800">
                         @if($hero->photo)
-                            <img src="{{ asset('storage/' . $hero->photo) }}" class="w-full h-full object-cover object-top" alt="{{ $hero->name }}">
+                            <img src="{{ asset('storage/' . $hero->photo) }}">
                         @else
                             <div class="flex items-center justify-center h-full text-gray-400 dark:text-gray-500">No Photo</div>
                         @endif
@@ -94,7 +94,21 @@
                 {{ $heroes->links() }}
             </div>
 
+<<<<<<< HEAD
         </div> 
+=======
+            {{-- TAMBAHAN: TOMBOL EXPORT EXCEL DI BAWAH LIST --}}
+            @auth
+                <div class="mt-4 flex justify-end">
+                    <a href="{{ route('heroes.export.excel') }}"
+                    class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition text-sm font-semibold">
+                        Export Excel
+                    </a>
+                </div>
+            @endauth
+
+        </div>
+>>>>>>> 669816559d917f1dd42c4c1b5001d03e482cc7d8
     </div>
 
     <footer class="w-full bg-[#050914] text-white border-t-4 border-yellow-500">
