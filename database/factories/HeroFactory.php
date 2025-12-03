@@ -10,15 +10,14 @@ class HeroFactory extends Factory
 {
     public function definition(): array
     {
-        // Bikin nama hero random (misal: "Alucard Smith")
         $name = fake()->unique()->firstName() . ' ' . fake()->lastName();
         
         return [
             'name' => $name,
-            'slug' => Str::slug($name), // Otomatis jadi slug (alucard-smith)
-            'photo' => null, // Foto dikosongin dulu
-            'story' => fake()->paragraphs(3, true), // Cerita random 3 paragraf
-            'user_id' => User::factory(), // Default user (nanti kita paksa pake ID Admin di Seeder)
+            'slug' => Str::slug($name),
+            'photo' => null,
+            'story' => fake()->paragraphs(3, true),
+            'user_id' => User::factory(),
         ];
     }
 }

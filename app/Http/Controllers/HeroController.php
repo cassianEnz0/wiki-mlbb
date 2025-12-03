@@ -14,50 +14,40 @@ use Illuminate\Support\Str;
 
 class HeroController extends Controller
 {
-    // =========================
     // EXPORT EXCEL
-    // =========================
     public function exportExcel()
     {
         return Excel::download(new HeroesExport, 'heroes.xlsx');
     }
 
-    // =========================
     // 1. TAMPILKAN LIST HERO + SEARCH + FILTER + PAGINATION
-    // =========================
     public function index()
     {
-        // Start Query with Eager Loading
         $heroes = Hero::with(['roles', 'positions'])->latest();
 
-        // Filter: Search Name
         if (request('search')) {
             $heroes->where('name', 'like', '%' . request('search') . '%');
         }
 
-        // Filter: Role (e.g. Mage)
         if (request('role')) {
             $heroes->whereHas('roles', function ($query) {
                 $query->where('name', request('role'));
             });
         }
 
-        // Filter: Lane (e.g. Mid Lane)
         if (request('lane')) {
             $heroes->whereHas('positions', function ($query) {
                 $query->where('name', 'like', '%' . request('lane') . '%');
             });
         }
 
-        // Get Data (10 per page) and keep filters in URL (appends)
         $heroes = $heroes->paginate(10)->appends(request()->all());
 
         return view('dashboard', compact('heroes'));
     }
 
-    // =========================
+
     // 2. FORM CREATE
-    // =========================
     public function create()
     {
         $roles = Role::all();
@@ -67,9 +57,8 @@ class HeroController extends Controller
         return view('heroes.create', compact('roles', 'items', 'positions'));
     }
 
-    // =========================
+
     // 3. STORE NEW HERO
-    // =========================
     public function store(Request $request)
     {
         $request->validate([
@@ -98,9 +87,8 @@ class HeroController extends Controller
         return redirect()->route('dashboard')->with('success', 'Hero sukses dibuat!');
     }
 
-    // =========================
+
     // 4. SHOW DETAIL
-    // =========================
     public function show(Hero $hero)
     {
         $hero->load(['roles', 'items', 'positions', 'author']);
@@ -108,9 +96,8 @@ class HeroController extends Controller
         return view('heroes.show', compact('hero'));
     }
 
-    // =========================
+
     // 5. EDIT FORM
-    // =========================
     public function edit(Hero $hero)
     {
         $roles = Role::all();
@@ -120,9 +107,8 @@ class HeroController extends Controller
         return view('heroes.edit', compact('hero', 'roles', 'items', 'positions'));
     }
 
-    // =========================
+
     // 6. UPDATE HERO
-    // =========================
     public function update(Request $request, Hero $hero)
     {
         $request->validate([
@@ -158,9 +144,7 @@ class HeroController extends Controller
         return redirect()->route('dashboard')->with('success', 'Hero berhasil diupdate!');
     }
 
-    // =========================
     // 7. DELETE HERO
-    // =========================
     public function destroy(Hero $hero)
     {
         if ($hero->photo) {

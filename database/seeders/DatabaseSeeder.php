@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Item;
 use App\Models\Position;
-use App\Models\Hero; // Jangan lupa import ini
+use App\Models\Hero;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         echo "✅ Admin Siap: admin@gmail.com | password\n";
 
-        // 2. ROLES (Sesuai Data Lu)
+        // 2. ROLES
         $rolesData = [
             ['name' => 'Tank',      'image' => 'images/roles/tank.png'],
             ['name' => 'Fighter',   'image' => 'images/roles/fighter.png'],
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Support',   'image' => 'images/roles/support.png'],
         ];
 
-        // Kita tampung hasilnya ke variabel biar bisa dipake buat Hero nanti
+        // Tampung hasilnya ke variabel biar bisa dipake buat Hero nanti
         $roleCollection = collect(); 
         
         foreach ($rolesData as $r) { 
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             $roleCollection->push($role);
         }
 
-        // 3. POSITIONS (Sesuai Data Lu)
+        // 3. POSITIONS
         $positionsData = [
             ['name' => 'Roam',      'image' => 'images/positions/roam.png'],
             ['name' => 'Mid Lane',  'image' => 'images/positions/mid.png'],
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
 
         echo "✅ Role & Position (dengan Gambar) Siap\n";
 
-        // 4. ITEMS (Data Lu Tetap Aman Disini)
+        // 4. ITEMS
         // --- ATTACK ITEMS ---
         $attackItems = [
             ['name' => "Berserker's Fury",       'image' => "images/items/attack/berserker's-fury.png"],
@@ -136,13 +136,13 @@ class DatabaseSeeder extends Seeder
 
         echo "✅ Semua Item Berhasil Dibuat\n";
 
-        // 5. BIKIN 15 HERO DUMMY (YANG BARU KITA TAMBAHKAN)
+        // 5. BIKIN 15 HERO DUMMY
         // Kita gunakan ID si Admin Ganteng
         $heroes = Hero::factory(15)->create([
             'user_id' => $admin->id 
         ]);
 
-        // 6. HUBUNGKAN HERO KE ROLE & POSISI (ACAK)
+        // 6. HUBUNGKAN HERO KE ROLE & POSISI
         foreach ($heroes as $hero) {
             // Kita ambil role dari $roleCollection yang di atas tadi
             // Attach 1 atau 2 role acak

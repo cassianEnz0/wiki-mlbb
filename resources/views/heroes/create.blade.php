@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
     <style>
-        /* BASE THEME */
+
         body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
         h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
         .card { background: #ffffff; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
@@ -20,7 +20,7 @@
         input[type="file"].form-control { height: auto !important; }
         label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
         
-        /* CUSTOM ITEM PICKER STYLE */
+
         .item-picker-container { position: relative; width: 100%; }
         .item-picker-trigger {
             background-color: #f9fafb; border: 1px solid #d1d5db; border-radius: 8px; min-height: 50px;
@@ -35,14 +35,14 @@
         }
         .item-picker-dropdown.active { display: flex; }
         
-        /* Kolom Kiri: Kategori */
+
         .picker-categories { width: 30%; background: #f3f4f6; border-right: 1px solid #e5e7eb; overflow-y: auto; }
         .cat-item { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 0.85rem; color: #4b5563; transition: all 0.2s; border-left: 3px solid transparent; }
         .cat-item::first-letter {text-transform: uppercase;}
         .cat-item:hover { background: #e5e7eb; color: #111827; }
         .cat-item.active { background: white; color: #2563eb; border-left-color: #2563eb; }
 
-        /* Kolom Kanan: Grid Item */
+
         .picker-items { width: 70%; padding: 16px; overflow-y: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-content: start; }
         .item-card { 
             border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
@@ -52,7 +52,7 @@
         .item-card img { width: 32px; height: 32px; object-fit: contain; margin-bottom: 6px; }
         .item-card span { display: block; font-size: 0.7rem; line-height: 1.2; font-weight: 600; color: #374151; }
         
-        /* Badge Item Terpilih di Input */
+
         .selected-badge {
             background: #fff; border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 10px 4px 6px;
             font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;
@@ -65,7 +65,7 @@
         .btn-primary { background-color: #111827; border: none; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
         .btn-outline-secondary { color: #4b5563; border-color: #d1d5db; padding: 10px 24px; border-radius: 8px; }
 
-        /* KHUSUS ROLE & POSISI: HILANGKAN KOLOM KATEGORI */
+
         .picker-no-cat .picker-categories { display: none !important; }
         .picker-no-cat .picker-items { width: 100% !important; }
     </style>

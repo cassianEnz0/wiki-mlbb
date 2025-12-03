@@ -42,7 +42,6 @@
                 </div>
             @endif
 
-            <!-- START: Bagian About Web yang Baru -->
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-8 p-6 lg:p-8 border-t-4 border-blue-600">
                 <h3 class="text-2xl font-extrabold text-gray-900 mb-4 border-b pb-2">
                     Tentang Wiki Legend: Fanbase Mobile Legends: Bang Bang.
@@ -54,24 +53,21 @@
                     Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan sumber informasi terpercaya dan selalu diperbarui. Setiap artikel dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
                 </p>
             </div>
-            <!-- END: Bagian About Web yang Baru -->
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 @foreach ($heroes as $hero)
-                <!-- Card Container dengan efek hover naik (-translate-y-2) -->
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 relative group border border-gray-100">
                     
-                    <!-- TOMBOL ADMIN (Hanya muncul jika login, posisi Pojok Kanan Atas) -->
                     @auth
                     <div class="absolute top-2 right-2 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition duration-300">
-                        <!-- Tombol Edit (Pensil) -->
+                        <!-- Tombol Edit -->
                         <a href="{{ route('heroes.edit', $hero->id) }}" class="bg-yellow-400 text-white p-2 rounded-full hover:bg-yellow-500 shadow-md transition" title="Edit Hero">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
                         </a>
 
-                        <!-- Tombol Hapus (X) -->
+                        <!-- Tombol Hapus -->
                         <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST">
                             @csrf 
                             @method('DELETE')
@@ -84,14 +80,13 @@
                     </div>
                     @endauth
 
-                    <!-- Gambar Hero (Bisa diklik menuju detail) -->
+                    <!-- Gambar Hero -->
                     <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200">
                         @if($hero->photo)
                             <img src="{{ asset('storage/' . $hero->photo) }}" class="w-full h-full object-cover object-top" alt="{{ $hero->name }}">
                         @else
                             <div class="flex items-center justify-center h-full text-gray-400">No Photo</div>
                         @endif
-                        <!-- Overlay Hitam dihapus agar bersih -->
                     </a>
 
                     <!-- Informasi Nama & Role -->
@@ -184,7 +179,6 @@
             borderRadius: '10px'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Find the specific form for THIS hero and submit it
                 document.getElementById('delete-form-' + heroId).submit();
             }
         })
