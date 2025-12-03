@@ -14,17 +14,19 @@ use Illuminate\Support\Str;
 
 class HeroController extends Controller
 {
-    // =========================
     // EXPORT EXCEL
-    // =========================
     public function exportExcel()
     {
         return Excel::download(new HeroesExport, 'heroes.xlsx');
     }
 
+<<<<<<< HEAD
     // =========================
     // 1. TAMPILKAN LIST HERO
     // =========================
+=======
+    // 1. TAMPILKAN LIST HERO + SEARCH + FILTER + PAGINATION
+>>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
     public function index()
     {
         $heroes = Hero::with(['roles', 'positions'])->latest();
@@ -50,9 +52,8 @@ class HeroController extends Controller
         return view('dashboard', compact('heroes'));
     }
 
-    // =========================
+
     // 2. FORM CREATE
-    // =========================
     public function create()
     {
         $roles = Role::all();
@@ -63,9 +64,8 @@ class HeroController extends Controller
         return view('heroes.create', compact('roles', 'items', 'positions'));
     }
 
-    // =========================
+
     // 3. STORE NEW HERO
-    // =========================
     public function store(Request $request)
     {
         $request->validate([
@@ -94,18 +94,16 @@ class HeroController extends Controller
         return redirect()->route('dashboard')->with('success', 'Hero sukses dibuat!');
     }
 
-    // =========================
+
     // 4. SHOW DETAIL
-    // =========================
     public function show(Hero $hero)
     {
         $hero->load(['roles', 'items', 'positions', 'author']);
         return view('heroes.show', compact('hero'));
     }
 
-    // =========================
+
     // 5. EDIT FORM
-    // =========================
     public function edit(Hero $hero)
     {
         $roles = Role::all();
@@ -116,9 +114,8 @@ class HeroController extends Controller
         return view('heroes.edit', compact('hero', 'roles', 'items', 'positions'));
     }
 
-    // =========================
+
     // 6. UPDATE HERO
-    // =========================
     public function update(Request $request, Hero $hero)
     {
         $request->validate([
@@ -153,9 +150,7 @@ class HeroController extends Controller
         return redirect()->route('dashboard')->with('success', 'Hero berhasil diupdate!');
     }
 
-    // =========================
     // 7. DELETE HERO
-    // =========================
     public function destroy(Hero $hero)
     {
         if ($hero->photo) {

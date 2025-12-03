@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     
     <style>
+<<<<<<< HEAD
         /* === CONFIGURATION VARIABLES === */
         :root { 
             --bg-body: #f3f4f6; 
@@ -57,8 +58,47 @@
             border: 1px solid var(--border-color); 
             border-radius: 12px; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+=======
+
+        body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
+        h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
+        .card { background: #ffffff; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .card-header { background: transparent; border-bottom: 2px solid #e5e7eb; padding: 25px; }
+        .form-control, .form-select { background-color: #f9fafb !important; border: 1px solid #d1d5db !important; color: #111827 !important; padding: 12px; border-radius: 8px; height: 50px !important; }
+        .form-control:focus { background-color: #ffffff !important; border-color: #111827 !important; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); }
+        input[type="file"].form-control { height: auto !important; }
+        label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        
+
+        .item-picker-container { position: relative; width: 100%; }
+        .item-picker-trigger {
+            background-color: #f9fafb; border: 1px solid #d1d5db; border-radius: 8px; min-height: 50px;
+            padding: 8px; display: flex; flex-wrap: wrap; gap: 8px; cursor: pointer; align-items: center;
+        }
+        .item-picker-trigger:hover { border-color: #9ca3af; }
+        .item-picker-dropdown {
+            display: none; position: absolute; top: 105%; left: 0; width: 600px; /* Lebar dropdown */
+            background: white; border: 1px solid #d1d5db; border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            z-index: 1050; overflow: hidden; height: 320px; /* Tinggi Fix */
+        }
+        .item-picker-dropdown.active { display: flex; }
+        
+
+        .picker-categories { width: 30%; background: #f3f4f6; border-right: 1px solid #e5e7eb; overflow-y: auto; }
+        .cat-item { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 0.85rem; color: #4b5563; transition: all 0.2s; border-left: 3px solid transparent; }
+        .cat-item::first-letter {text-transform: uppercase;}
+        .cat-item:hover { background: #e5e7eb; color: #111827; }
+        .cat-item.active { background: white; color: #2563eb; border-left-color: #2563eb; }
+
+
+        .picker-items { width: 70%; padding: 16px; overflow-y: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-content: start; }
+        .item-card { 
+            border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
+>>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
         }
         
+<<<<<<< HEAD
         /* HEADER TYPOGRAPHY (Decorative) */
         h4, h5 { 
             font-family: 'Cinzel', serif; 
@@ -68,6 +108,12 @@
         html.dark h4, html.dark h5 { 
             color: #facc15; 
             text-shadow: 0 0 10px rgba(250, 204, 21, 0.3); 
+=======
+
+        .selected-badge {
+            background: #fff; border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 10px 4px 6px;
+            font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;
+>>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
         }
 
         /* LABELS (Clean Font) */
@@ -81,6 +127,7 @@
         }
         html.dark .form-label { color: #facc15; }
 
+<<<<<<< HEAD
         /* INPUT FIELDS */
         .form-control { 
             background-color: var(--input-bg) !important; 
@@ -195,6 +242,11 @@
         html.dark .note-editing-area { background-color: #0f172a; color: #ffffff; }
         html.dark .note-placeholder { color: #94a3b8; }
         html.dark .note-btn { color: white; background: #334155; }
+=======
+
+        .picker-no-cat .picker-categories { display: none !important; }
+        .picker-no-cat .picker-items { width: 100% !important; }
+>>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
     </style>
 </head>
 <body class="py-5">

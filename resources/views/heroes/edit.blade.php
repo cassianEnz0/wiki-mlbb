@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     
     <style>
+<<<<<<< HEAD
         /* === CONFIGURATION VARIABLES === */
         :root { 
             --bg-body: #f3f4f6; 
@@ -25,6 +26,22 @@
             /* Buttons (Light Mode) */
             --btn-cancel-bg: #9ca3af;
             --btn-cancel-text: #ffffff;
+=======
+
+        body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
+        h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
+        .card { background: #ffffff; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .card-header { background: transparent; border-bottom: 2px solid #e5e7eb; padding: 25px; }
+        .form-control, .form-select { background-color: #f9fafb !important; border: 1px solid #d1d5db !important; color: #111827 !important; padding: 12px; border-radius: 8px; height: 50px !important; }
+        .form-control:focus { background-color: #ffffff !important; border-color: #111827 !important; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); }
+        input[type="file"].form-control { height: auto !important; }
+        label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        
+        .item-picker-container { position: relative; width: 100%; }
+        .item-picker-trigger {
+            background-color: #f9fafb; border: 1px solid #d1d5db; border-radius: 8px; min-height: 50px;
+            padding: 8px; display: flex; flex-wrap: wrap; gap: 8px; cursor: pointer; align-items: center;
+>>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
         }
     
         /* === DARK MODE VARIABLES === */
