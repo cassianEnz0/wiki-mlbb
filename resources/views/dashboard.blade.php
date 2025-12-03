@@ -15,6 +15,15 @@
                 </form>
                 
                 @auth
+                    {{-- TOMBOL EXPORT EXCEL (TAMBAHAN) --}}
+                    <a href="{{ route('heroes.export.excel') }}" 
+   class="px-4 py-2 rounded-md whitespace-nowrap font-bold flex items-center"
+   style="background:#16a34a; color:#ffffff; box-shadow:0 4px 10px rgba(22,163,74,0.4); text-decoration:none;">
+    Export Excel
+</a>
+
+
+                    {{-- TOMBOL LAMA: + BARU (TIDAK DIUBAH) --}}
                     <a href="{{ route('heroes.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition whitespace-nowrap font-bold flex items-center" style="text-decoration: none;">
                         + Baru
                     </a>
@@ -141,6 +150,16 @@ Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang 
             <div class="mt-6">
                 {{ $heroes->links() }}
             </div>
+
+            {{-- TAMBAHAN: TOMBOL EXPORT EXCEL DI BAWAH LIST --}}
+            @auth
+                <div class="mt-4 flex justify-end">
+                    <a href="{{ route('heroes.export.excel') }}"
+                       class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition text-sm font-semibold">
+                        Export Excel
+                    </a>
+                </div>
+            @endauth
 
         </div>
     </div>

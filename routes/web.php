@@ -20,7 +20,11 @@ Route::get('/', [HeroController::class, 'index'])->name('dashboard');
 | biar kata 'create' gak dianggap sebagai nama hero.
 */
 Route::middleware('auth')->group(function () {
-    
+
+    // >>> EXPORT EXCEL (HANYA USER LOGIN)
+    Route::get('/heroes/export/excel', [HeroController::class, 'exportExcel'])
+        ->name('heroes.export.excel');
+
     // Create
     Route::get('/heroes/create', [HeroController::class, 'create'])->name('heroes.create');
     Route::post('/heroes', [HeroController::class, 'store'])->name('heroes.store');
