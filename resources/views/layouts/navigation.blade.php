@@ -51,7 +51,7 @@
                                 <x-dropdown-link :href="route('dashboard', ['lane' => 'Gold Lane'])">Gold Lane</x-dropdown-link>
                                 <x-dropdown-link :href="route('dashboard', ['lane' => 'Exp Lane'])">Exp Lane</x-dropdown-link>
                                 <x-dropdown-link :href="route('dashboard', ['lane' => 'Mid Lane'])">Mid Lane</x-dropdown-link>
-                                <x-dropdown-link :href="route('dashboard', ['lane' => 'Roamer'])">Roam / Roamer</x-dropdown-link>
+                                <x-dropdown-link :href="route('dashboard', ['lane' => 'Roamer'])">Roam</x-dropdown-link>
                                 <x-dropdown-link :href="route('dashboard', ['lane' => 'Jungler'])">Jungler</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

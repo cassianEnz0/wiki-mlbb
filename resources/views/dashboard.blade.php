@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Daftar Hero MLBB') }}
+                {{ __('Wiki Legend') }}
             </h2>
 
             <div class="flex gap-2 w-full md:w-auto justify-end">
@@ -48,54 +48,57 @@
                     Tentang Wiki Legend: Fanbase Mobile Legends: Bang Bang.
                 </h3>
                 <p class="text-gray-700 leading-relaxed mb-4">
-                    Selamat datang di Legend Wiki  rumah bagi para penggemar Mobile Legends: Bang Bang!
-Website ini dibuat sebagai pusat informasi komunitas, tempat kamu bisa menemukan berbagai data, trivia, hingga pembahasan lengkap seputar hero, lore, item, role, dan update terbaru MLBB.
-
-Kami hadir untuk memudahkan pemain baik pemula maupun veteran dalam memahami gameplay, meta, serta perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi agar pengalaman membaca kamu lebih nyaman.
-
-WikiFans dikembangkan oleh komunitas fanbase yang ingin menghadirkan sumber informasi terpercaya dan selalu up to date. Setiap artikel yang ada di sini dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
-
-Terima kasih sudah mampir!
-Selamat menjelajah, semoga web ini membantu perjalanan kamu menjadi pemain yang lebih hebat!
-                </p>
-                <p class="text-gray-700 leading-relaxed">
-                    Tujuan kami adalah menjadi sumber referensi cepat dan akurat, membantu Anda memilih hero yang tepat, memahami meta, dan menyusun strategi tim yang solid. Gunakan fitur pencarian di atas untuk menemukan hero favorit Anda atau jelajahi daftar hero di bawah ini!
+                    Selamat datang di Wiki Legend, pusat informasi untuk para penggemar Mobile Legends: Bang Bang.
+                    Wiki ini dibuat sebagai ruang komunitas yang menyajikan berbagai data, trivia, serta pembahasan lengkap mengenai hero, lore, item, role, dan update terbaru MLBB.
+                    Tujuan utama Wiki Legend adalah membantu pemain, baik pemula maupun veteran, memahami gameplay, meta, dan perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi demi kenyamanan membaca.
+                    Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan sumber informasi terpercaya dan selalu diperbarui. Setiap artikel dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
                 </p>
             </div>
             <!-- END: Bagian About Web yang Baru -->
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 @foreach ($heroes as $hero)
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition duration-300 relative group border border-gray-100">
+                <!-- Card Container dengan efek hover naik (-translate-y-2) -->
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 relative group border border-gray-100">
                     
-                    <div class="relative h-64 w-full bg-gray-200">
+                    <!-- TOMBOL ADMIN (Hanya muncul jika login, posisi Pojok Kanan Atas) -->
+                    @auth
+                    <div class="absolute top-2 right-2 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition duration-300">
+                        <!-- Tombol Edit (Pensil) -->
+                        <a href="{{ route('heroes.edit', $hero->id) }}" class="bg-yellow-400 text-white p-2 rounded-full hover:bg-yellow-500 shadow-md transition" title="Edit Hero">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                            </svg>
+                        </a>
+
+                        <!-- Tombol Hapus (X) -->
+                        <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST">
+                            @csrf 
+                            @method('DELETE')
+                            <button type="button" onclick="confirmDelete('{{ $hero->id }}', '{{ $hero->name }}')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md transition" title="Hapus Hero">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    @endauth
+
+                    <!-- Gambar Hero (Bisa diklik menuju detail) -->
+                    <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200">
                         @if($hero->photo)
                             <img src="{{ asset('storage/' . $hero->photo) }}" class="w-full h-full object-cover object-top" alt="{{ $hero->name }}">
                         @else
                             <div class="flex items-center justify-center h-full text-gray-400">No Photo</div>
                         @endif
-                        
-                        <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center gap-2">
-                            
-                            <a href="{{ route('heroes.show', $hero->id) }}" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">Detail</a>
-                            
-                            @auth
-                                <a href="{{ route('heroes.edit', $hero->id) }}" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">Edit</a>
-                                <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST" style="display:inline;">
-                                    @csrf 
-                                    @method('DELETE')
-    
-                                    <button type="button" onclick="confirmDelete('{{ $hero->id }}', '{{ $hero->name }}')" class="text-white border border-white px-4 py-1 rounded hover:bg-white hover:text-black text-sm w-24 text-center font-bold no-underline">
-                                        Hapus
-                                    </button>
-                                </form>
-                            @endauth
+                        <!-- Overlay Hitam dihapus agar bersih -->
+                    </a>
 
-                        </div>
-                    </div>
-
+                    <!-- Informasi Nama & Role -->
                     <div class="px-3 pt-3 pb-6 text-center bg-white relative z-10 border-t">
-                        <h3 class="text-md font-bold text-gray-800 truncate">{{ $hero->name }}</h3>
+                        <a href="{{ route('heroes.show', $hero->id) }}" class="hover:text-blue-600 transition">
+                            <h3 class="text-md font-bold text-gray-800 truncate">{{ $hero->name }}</h3>
+                        </a>
                         <div class="mt-2 flex flex-wrap justify-center gap-1">
                             @foreach($hero->roles->take(2) as $role)
                                 <span class="bg-gray-100 text-gray-800 text-[10px] uppercase font-bold px-2 py-1 rounded border border-gray-200">
