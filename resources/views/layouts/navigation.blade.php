@@ -94,9 +94,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     </nav>
-=======
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
@@ -144,4 +142,3 @@
         </div>
     </div>
 </nav>
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
