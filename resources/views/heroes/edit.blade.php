@@ -3,45 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buat Hero Baru - Wiki Legend</title>
+    <title>Edit Hero: {{ $hero->name }}</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     
     <style>
-<<<<<<< HEAD
-        /* === CONFIGURATION VARIABLES === */
+        /* === BASE VARIABLES === */
         :root { 
             --bg-body: #f3f4f6; 
             --bg-card: #ffffff; 
             --text-main: #1f2937; 
-            --border-color: #e5e7eb; 
+            --border-color: #d1d5db; 
             --input-bg: #ffffff; 
             --input-border: #9ca3af;
             
-            /* Category Headers (Light Mode) */
-            --cat-bg: #e2e8f0; 
-            --cat-text: #374151;
-            
-            /* Buttons (Light Mode) */
-            --btn-cancel-bg: #9ca3af;
-            --btn-cancel-text: #ffffff;
-=======
-
-        body { background-color: #f3f4f6; color: #1f2937; font-family: 'Poppins', sans-serif; }
-        h4, h5 { font-family: 'Cinzel', serif; color: #111827; letter-spacing: 1px; font-weight: 800; }
-        .card { background: #ffffff; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .card-header { background: transparent; border-bottom: 2px solid #e5e7eb; padding: 25px; }
-        .form-control, .form-select { background-color: #f9fafb !important; border: 1px solid #d1d5db !important; color: #111827 !important; padding: 12px; border-radius: 8px; height: 50px !important; }
-        .form-control:focus { background-color: #ffffff !important; border-color: #111827 !important; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); }
-        input[type="file"].form-control { height: auto !important; }
-        label { color: #4b5563; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
-        
-        .item-picker-container { position: relative; width: 100%; }
-        .item-picker-trigger {
-            background-color: #f9fafb; border: 1px solid #d1d5db; border-radius: 8px; min-height: 50px;
-            padding: 8px; display: flex; flex-wrap: wrap; gap: 8px; cursor: pointer; align-items: center;
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
+            /* Light Mode Specifics */
+            --header-bg: #e2e8f0;
+            --header-text: #374151;
+            --hover-item: rgba(0,0,0,0.05);
         }
     
         /* === DARK MODE VARIABLES === */
@@ -53,20 +34,17 @@
             --input-bg: #1e293b;      
             --input-border: #64748b;  
             
-            /* Category Headers (Dark Mode) */
-            --cat-bg: #334155;
-            --cat-text: #facc15;
-
-            /* Buttons (Dark Mode) */
-            --btn-cancel-bg: #334155;
-            --btn-cancel-text: #cbd5e1;
+            /* Dark Mode Specifics */
+            --header-bg: #334155;
+            --header-text: #facc15;
+            --hover-item: rgba(250, 204, 21, 0.2);
         }
     
         body { 
             background-color: var(--bg-body); 
             color: var(--text-main); 
-            font-family: 'Poppins', sans-serif; /* Default Font Clean */
-            transition: background-color 0.3s, color 0.3s; 
+            font-family: 'Poppins', sans-serif; /* FORCE CLEAN FONT EVERYWHERE */
+            transition: all 0.3s ease;
         }
 
         .card { 
@@ -76,11 +54,12 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
         
-        /* HEADER TYPOGRAPHY (Decorative) */
+        /* HEADINGS (Decorative Font) */
         h4, h5 { 
             font-family: 'Cinzel', serif; 
             font-weight: 800; 
             letter-spacing: 1px; 
+            color: var(--text-main);
         }
         html.dark h4, html.dark h5 { 
             color: #facc15; 
@@ -98,16 +77,14 @@
         }
         html.dark .form-label { color: #facc15; }
 
-        /* INPUT FIELDS */
+        /* INPUTS */
         .form-control { 
             background-color: var(--input-bg) !important; 
             border: 2px solid var(--input-border) !important; 
             color: var(--text-main) !important; 
             font-weight: 500;
-            font-family: 'Poppins', sans-serif;
+            border-radius: 8px;
         }
-        .form-control::placeholder { color: #9ca3af; opacity: 1; }
-        html.dark .form-control::placeholder { color: #64748b; }
         .form-control:focus { 
             box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.25); 
             border-color: #facc15 !important; 
@@ -123,11 +100,9 @@
             min-height: 50px; 
             cursor: pointer; 
             display: flex; flex-wrap: wrap; gap: 8px; align-items: center; 
-            font-family: 'Poppins', sans-serif;
             font-weight: 500;
         }
-        .picker-box:hover { border-color: #f59e0b; }
-        html.dark .picker-box:hover { border-color: #facc15; }
+        html.dark .picker-box { border-color: #facc15; }
 
         /* DROPDOWN */
         .picker-dropdown { 
@@ -140,11 +115,11 @@
         }
         .picker-dropdown.show { display: block; }
 
-        /* CATEGORY HEADER (FIXED: Dynamic Colors) */
+        /* CATEGORY HEADER (FIXED COLORS) */
         .category-header {
-            background-color: var(--cat-bg);
-            color: var(--cat-text);
-            font-family: 'Cinzel', serif; /* Decorative font fits headers */
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            font-family: 'Cinzel', serif;
             font-weight: 800;
             font-size: 0.7rem;
             padding: 8px 12px;
@@ -152,7 +127,6 @@
             margin: 12px 0 8px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 1px solid rgba(0,0,0,0.05);
         }
 
         /* ITEMS GRID */
@@ -160,24 +134,24 @@
 
         .picker-item { 
             text-align: center; padding: 8px; border: 1px solid transparent; border-radius: 6px; cursor: pointer; 
-            color: var(--text-main); font-size: 0.7rem; font-weight: 600; font-family: 'Poppins', sans-serif;
+            color: var(--text-main); font-size: 0.7rem; font-weight: 600;
         }
-        .picker-item:hover { background-color: rgba(128, 128, 128, 0.1); }
-        html.dark .picker-item:hover { border-color: #facc15; }
+        .picker-item:hover { background-color: var(--hover-item); }
+        html.dark .picker-item:hover { border: 1px solid #facc15; }
         
         .picker-item img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px; display: block; margin: 0 auto; }
         
         .picker-item.selected { 
             background-color: rgba(250, 204, 21, 0.15); 
             border: 1px solid #facc15; 
-            color: #d97706; 
+            color: #d97706; /* Dark Gold Text */
         }
         html.dark .picker-item.selected { color: #facc15; }
 
         /* SELECTED BADGE */
         .selected-badge { 
             background: rgba(128, 128, 128, 0.1); border: 1px solid var(--border-color); color: var(--text-main); 
-            padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; font-family: 'Poppins', sans-serif;
+            padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; 
         }
         html.dark .selected-badge { 
             background: rgba(66, 32, 6, 0.5); 
@@ -185,26 +159,20 @@
             color: #facc15; 
         }
 
-        /* BUTTONS (FIXED FONTS & COLORS) */
+        /* BUTTONS (FIXED FONT) */
         .btn {
-            font-family: 'Poppins', sans-serif !important;
-            font-weight: 600;
+            font-family: 'Poppins', sans-serif !important; 
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
+            font-weight: 600;
+            padding: 10px 24px;
         }
-
-        /* Primary Button (Save) */
-        .btn-primary { background-color: #1f2937; color: white; }
+        .btn-primary { background-color: #1f2937; color: white; border: none; }
         html.dark .btn-primary { background-color: #facc15; color: #000; }
         html.dark .btn-primary:hover { background-color: #eab308; }
 
-        /* Secondary Button (Cancel/Batal) */
-        .btn-secondary { background-color: var(--btn-cancel-bg); color: var(--btn-cancel-text); }
-        .btn-secondary:hover { opacity: 0.9; }
-        html.dark .btn-secondary { border: 1px solid #475569; }
+        .btn-secondary { background-color: #9ca3af; color: white; border: none; }
+        html.dark .btn-secondary { background-color: #334155; color: #cbd5e1; }
 
         /* Summernote Fixes */
         html.dark .note-editor { border-color: var(--input-border); }
@@ -220,39 +188,40 @@
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card mb-5">
-                <div class="card-header py-4 px-4 border-bottom">
-                    <h4 class="m-0">Create New Hero</h4>
+                <div class="card-header py-4 px-4 border-bottom d-flex justify-content-between align-items-center">
+                    <h4 class="m-0">Edit Hero: {{ $hero->name }}</h4>
+                    @if($hero->photo)
+                        <img src="{{ asset('storage/' . $hero->photo) }}" class="rounded-circle" width="50" height="50" style="object-fit:cover; border: 2px solid #ca8a04;">
+                    @endif
                 </div>
                 <div class="card-body p-4 p-md-5">
                     
                     @if ($errors->any())
-                        <div class="alert alert-danger"><ul class="mb-0">@foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach</ul></div>
+                        <div class="alert alert-danger"><ul class="mb-0">@foreach ($errors->all() as $e) <li>{{ $e }}</li> @endforeach</ul></div>
                     @endif
 
-                    <form action="{{ route('heroes.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('heroes.update', $hero->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         
                         <div class="row g-5">
                             <div class="col-md-5">
                                 <h5 class="mb-3 border-bottom pb-2">Identitas Hero</h5>
-                                
                                 <div class="mb-3">
                                     <label class="form-label">Nama Hero</label>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required placeholder="Contoh: Tigreal">
+                                    <input type="text" name="name" class="form-control" value="{{ old('name', $hero->name) }}" required>
                                 </div>
-
                                 <div class="mb-3">
-                                    <label class="form-label">Foto Hero</label>
+                                    <label class="form-label">Ganti Foto</label>
                                     <input type="file" name="photo" class="form-control">
+                                    <div class="form-text text-muted small">Kosongkan jika tidak ingin mengubah foto.</div>
                                 </div>
-
                                 <div class="mb-3 position-relative">
-                                    <label class="form-label">Role (Bisa lebih dari 1)</label>
+                                    <label class="form-label">Role</label>
                                     <div class="picker-box" id="roleTrigger">Pilih Role...</div>
                                     <div class="picker-dropdown" id="roleDropdown"></div>
                                     <select name="roles[]" id="roleInput" multiple hidden></select>
                                 </div>
-
                                 <div class="mb-3 position-relative">
                                     <label class="form-label">Posisi / Lane</label>
                                     <div class="picker-box" id="posTrigger">Pilih Posisi...</div>
@@ -263,24 +232,22 @@
 
                             <div class="col-md-7">
                                 <h5 class="mb-3 border-bottom pb-2">Atribut & Kisah</h5>
-
                                 <div class="mb-3 position-relative">
-                                    <label class="form-label">Rekomendasi Build (Max 6 Item)</label>
+                                    <label class="form-label">Rekomendasi Build (Max 6)</label>
                                     <div class="picker-box" id="itemTrigger">Pilih Item Build...</div>
                                     <div class="picker-dropdown" id="itemDropdown"></div>
                                     <select name="items[]" id="itemInput" multiple hidden></select>
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Kisah / Lore</label>
-                                    <textarea id="summernote" name="story">{{ old('story') }}</textarea>
+                                    <textarea id="summernote" name="story">{{ old('story', $hero->story) }}</textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
                             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Batal</a>
-                            <button type="submit" class="btn btn-primary">Simpan Hero Baru</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>
@@ -294,7 +261,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script>
-    // 1. SETUP DARK MODE CHECK
+    // 1. Force Dark Mode if enabled
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
     }
@@ -305,24 +272,28 @@
             toolbar: [['style',['style']],['font',['bold','underline','clear']],['para',['ul','ol']],['view',['fullscreen']]]
         });
 
-        // 2. LOAD DATA
+        // 2. Load Master Data from Controller
         const roles = @json($roles ?? []);
         const positions = @json($positions ?? []);
-        const items = @json($items ?? []); 
+        const items = @json($items ?? []); // Grouped Object
         const baseUrl = "{{ asset('') }}";
 
-        // DATA OLD (If validation fails)
-        const oldRoles = @json(old('roles', []));
-        const oldPos = @json(old('positions', []));
-        const oldItems = @json(old('items', []));
+        // 3. Load EXISTING Data (Prioritize Old Input, then DB)
+        // Note: We use pluck('id') to get simple array of IDs [1, 2, 5]
+        const oldRoles = @json(old('roles', $hero->roles->pluck('id')));
+        const oldPos = @json(old('positions', $hero->positions->pluck('id')));
+        const oldItems = @json(old('items', $hero->items->pluck('id')));
 
-        // 3. PICKER FUNCTION
+        // 4. Main Logic
         function setupPicker(triggerId, dropdownId, inputId, dataSource, selectedIdsRaw = [], maxSelect = null) {
             const $trigger = $(triggerId);
             const $dropdown = $(dropdownId);
             const $input = $(inputId);
-            let currentSelection = selectedIdsRaw.map(String);
             
+            // Ensure all IDs are strings for comparison
+            let currentSelection = Array.isArray(selectedIdsRaw) ? selectedIdsRaw.map(String) : [];
+
+            // Helper: Render HTML for one item
             function renderItemHTML(obj) {
                 let imgPath = obj.image;
                 if (imgPath && !imgPath.startsWith('http')) imgPath = baseUrl + imgPath;
@@ -338,15 +309,16 @@
                 `;
             }
 
+            // A. RENDER DROPDOWN CONTENT
             $dropdown.empty();
-
             if (Array.isArray(dataSource)) {
+                // Flat Array (Roles)
                 let html = '<div class="items-grid">';
                 dataSource.forEach(obj => { html += renderItemHTML(obj); });
                 html += '</div>';
                 $dropdown.append(html);
             } else {
-                // Object Group (Categories)
+                // Grouped Object (Items)
                 Object.keys(dataSource).forEach(category => {
                     $dropdown.append(`<div class="category-header">${category}</div>`);
                     let html = '<div class="items-grid">';
@@ -356,8 +328,10 @@
                 });
             }
 
+            // B. UPDATE UI BASED ON PRE-SELECTED DATA
             updateTriggerUI();
 
+            // C. EVENT HANDLERS
             $trigger.off('click').on('click', function(e) {
                 e.stopPropagation();
                 $('.picker-dropdown').not($dropdown).removeClass('show');
@@ -379,6 +353,7 @@
                 updateTriggerUI();
             });
 
+            // D. UPDATE TRIGGER & HIDDEN INPUT
             function updateTriggerUI() {
                 $input.empty();
                 $trigger.empty();
@@ -388,9 +363,12 @@
                 } else {
                     currentSelection.forEach(selId => {
                         let itemData = null;
+                        
+                        // Search for the item data based on ID
                         if (Array.isArray(dataSource)) {
                             itemData = dataSource.find(x => String(x.id) === selId);
                         } else {
+                            // Search inside groups
                             Object.values(dataSource).forEach(group => {
                                 const found = group.find(x => String(x.id) === selId);
                                 if (found) itemData = found;
@@ -398,7 +376,9 @@
                         }
 
                         if (itemData) {
+                            // Append Badge to Trigger Box
                             $trigger.append(`<div class="selected-badge">${itemData.name}</div>`);
+                            // Append <option selected> to Hidden Select
                             $input.append(`<option value="${itemData.id}" selected>${itemData.id}</option>`);
                         }
                     });
@@ -406,6 +386,7 @@
             }
         }
 
+        // 5. Initialize Pickers
         setupPicker('#roleTrigger', '#roleDropdown', '#roleInput', roles, oldRoles);
         setupPicker('#posTrigger', '#posDropdown', '#posInput', positions, oldPos);
         setupPicker('#itemTrigger', '#itemDropdown', '#itemInput', items, oldItems, 6);
