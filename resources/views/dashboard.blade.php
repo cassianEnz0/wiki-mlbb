@@ -15,17 +15,11 @@
                 </form>
                 
                 @auth
-<<<<<<< HEAD
                     <a href="{{ route('heroes.export.excel') }}" 
                         class="px-4 py-2 rounded-md whitespace-nowrap font-bold flex items-center bg-green-600 text-white hover:bg-green-700 shadow-md decoration-none text-sm">
                         Excel
                     </a>
                     <a href="{{ route('heroes.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition whitespace-nowrap font-bold flex items-center decoration-none text-sm">
-=======
-                
-                    {{-- TOMBOL LAMA: + BARU (TIDAK DIUBAH) --}}
-                    <a href="{{ route('heroes.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition whitespace-nowrap font-bold flex items-center" style="text-decoration: none;">
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
                         + Baru
                     </a>
                 @endauth
@@ -43,26 +37,19 @@
                 </div>
             @endif
 
-<<<<<<< HEAD
             <div class="bg-white dark:bg-[#0f172a] overflow-hidden shadow-xl sm:rounded-lg mb-8 p-6 lg:p-8 border-t-4 border-blue-600 dark:border-yellow-500 transition-colors duration-300">
                 <h3 class="text-2xl font-extrabold text-gray-900 dark:text-yellow-400 mb-4 border-b dark:border-gray-700 pb-2">
-=======
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-8 p-6 lg:p-8 border-t-4 border-blue-600">
-                <h3 class="text-2xl font-extrabold text-gray-900 mb-4 border-b pb-2">
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
                     Tentang Wiki Legend: Fanbase Mobile Legends: Bang Bang.
                 </h3>
                 <p class="text-gray-700 dark:text-gray-200 leading-relaxed mb-4">
                     Selamat datang di Wiki Legend, pusat informasi untuk para penggemar Mobile Legends: Bang Bang.
-Wiki ini dibuat sebagai ruang komunitas yang menyajikan berbagai data, trivia, serta pembahasan lengkap mengenai hero, lore, item, role, dan update terbaru MLBB.
-Tujuan utama Wiki Legend adalah membantu pemain, baik pemula maupun veteran, memahami gameplay, meta, dan perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi demi kenyamanan membaca.
-Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan sumber informasi terpercaya dan selalu diperbarui. Setiap artikel dibuat dengan semangat berbagi, belajar, dan merayakan dunia MLBB bersama-sama.
+                    Wiki ini dibuat sebagai ruang komunitas yang menyajikan berbagai data, trivia, serta pembahasan lengkap mengenai hero, lore, item, role, dan update terbaru MLBB.
+                    Tujuan utama Wiki Legend adalah membantu pemain, baik pemula maupun veteran, memahami gameplay, meta, dan perkembangan dunia MLBB. Semua konten disusun secara sederhana, terstruktur, dan mudah dijelajahi demi kenyamanan membaca.
                 </p>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 @foreach ($heroes as $hero)
-<<<<<<< HEAD
                 <div class="bg-white dark:bg-[#0f172a] overflow-hidden shadow-sm sm:rounded-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 relative group border border-gray-100 dark:border-yellow-600/40">
                     
                     @auth
@@ -70,20 +57,6 @@ Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan 
                         <a href="{{ route('heroes.edit', $hero->id) }}" class="bg-yellow-400 text-white p-2 rounded-full hover:bg-yellow-500 shadow-md transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>
                         </a>
-=======
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 relative group border border-gray-100">
-                    
-                    @auth
-                    <div class="absolute top-2 right-2 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition duration-300">
-                        <!-- Tombol Edit -->
-                        <a href="{{ route('heroes.edit', $hero->id) }}" class="bg-yellow-400 text-white p-2 rounded-full hover:bg-yellow-500 shadow-md transition" title="Edit Hero">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                            </svg>
-                        </a>
-
-                        <!-- Tombol Hapus -->
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
                         <form id="delete-form-{{ $hero->id }}" action="{{ route('heroes.destroy', $hero->id) }}" method="POST">
                             @csrf @method('DELETE')
                             <button type="button" onclick="confirmDelete('{{ $hero->id }}', '{{ $hero->name }}')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md transition">
@@ -93,12 +66,7 @@ Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan 
                     </div>
                     @endauth
 
-<<<<<<< HEAD
                     <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200 dark:bg-gray-800">
-=======
-                    <!-- Gambar Hero -->
-                    <a href="{{ route('heroes.show', $hero->id) }}" class="block relative h-64 w-full bg-gray-200">
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
                         @if($hero->photo)
                             <img src="{{ asset('storage/' . $hero->photo) }}" class="w-full h-full object-cover object-top" alt="{{ $hero->name }}">
                         @else
@@ -143,36 +111,25 @@ Wiki Legend dikembangkan oleh komunitas penggemar yang berkomitmen menghadirkan 
         </div>
     </footer>
 
-<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function confirmDelete(heroId, heroName) {
             Swal.fire({
-                title: 'Hapus Hero ' + heroName + '?', text: "Data ini tidak bisa dikembalikan!", icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', cancelButtonColor: '#3085d6', confirmButtonText: 'Ya, Hapus!', cancelButtonText: 'Batal', background: '#fff', borderRadius: '10px'
-            }).then((result) => { if (result.isConfirmed) { document.getElementById('delete-form-' + heroId).submit(); } })
+                title: 'Hapus Hero ' + heroName + '?',
+                text: "Data ini tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                background: '#fff',
+                borderRadius: '10px'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + heroId).submit();
+                }
+            })
         }
     </script>
 </x-app-layout>
-=======
-<script>
-    function confirmDelete(heroId, heroName) {
-        Swal.fire({
-            title: 'Hapus Hero ' + heroName + '?',
-            text: "Data ini tidak bisa dikembalikan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Batal',
-            background: '#fff',
-            borderRadius: '10px'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-form-' + heroId).submit();
-            }
-        })
-    }
-</script>
-</x-app-layout>
->>>>>>> 30366a9011ca734b2abe642cba4bb813883ee145
